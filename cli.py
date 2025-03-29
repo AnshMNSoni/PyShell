@@ -345,14 +345,22 @@ def display_prompt(username):
     time_str = datetime.now().strftime("%H:%M:%S")
     console.print(f"\n[bold cyan]👤 {username}@{hostname}[/bold cyan] [yellow]~ {cwd}[/yellow]  [bold magenta]{time_str}[/bold magenta]", end="\n❯ ", style=Style(color="bright_green"))
 
+# clear console 
+def clear(*args):
+    console.print("="*70, style="bold blue")
+    display_prompt(username)
+    console.clear()
+
 def main():
     console.clear()
-    console.print("="*50, style="bold blue")
-    console.print("Welcome to PyShell (Python )", style="bold yellow")
+    console.print("="*70, style="bold blue")
+    console.print("Welcome to PyCLI", style="bold yellow", end=" ")
+    console.print("{Python Command Line Interface by ansh.mn.soni}", style="magenta")
     console.print(f"System: {platform.system()} {platform.release()} ", style="bold cyan")
-    console.print("="*50, style="bold blue")
-    
-    username, role = register_user() if Prompt.ask("New user? (y/n)", choices=["y", "n"]) == "y" else login_user()
+    console.print("="*70, style="bold blue")
+
+    global username
+    username, role = register_user() if Prompt.ask("New user?", choices=["y", "n"]) == "y" else login_user()
 
     commands = {
         "rename": rename_item,
@@ -370,6 +378,7 @@ def main():
         "tasks": list_scheduled_tasks,  
         "unschedule": remove_scheduled_task,
         "stop": stop_running_tasks,
+        "cls": clear,
         "exit": lambda _: exit()
     }
     
