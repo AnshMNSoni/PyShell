@@ -112,7 +112,7 @@ def copy_file(args):
         except Exception as e:
             console.print(str(e), style="bold red")
 
-def list_processes():
+def list_processes(*args):
     for proc in psutil.process_iter(['pid', 'name']):
         console.print(f"{proc.info['pid']} - {proc.info['name']}")
 
@@ -126,7 +126,7 @@ def kill_process(args):
     except Exception as e:
         console.print(str(e), style="bold red")
 
-def network_info():
+def network_info(*args):
     try:
         local_ip = socket.gethostbyname(socket.gethostname())
         external_ip = requests.get("https://api64.ipify.org").text
@@ -135,13 +135,16 @@ def network_info():
     except Exception as e:
         console.print(f"Network Error: {e}", style="bold red")
 
-def generate_password():
+def generate_password(*args):
     length = Prompt.ask("Enter password length (default 12)", default="12")
     try:
         length = int(length)
     except ValueError:
         console.print("Invalid input. Using default length (12)", style="bold red")
         length = 12
+        display_prompt(username)
+        return
+    
     characters = string.ascii_letters + string.digits + string.punctuation
     password = ''.join(random.choice(characters) for _ in range(length))
     console.print(f"Generated Password: {password}", style="bold green")
@@ -343,7 +346,7 @@ def display_prompt(username):
     hostname = platform.node()
     cwd = os.getcwd()
     time_str = datetime.now().strftime("%H:%M:%S")
-    console.print(f"\n[bold cyan]👤 {username}@{hostname}[/bold cyan] [yellow]~ {cwd}[/yellow]  [bold magenta]{time_str}[/bold magenta]", end="\n❯ ", style=Style(color="bright_green"))
+    console.print(f"\n[bold cyan]👤 {username}@{hostname}[/bold cyan] [yellow]~ {cwd}[/yellow]  [bold magenta]{time_str}[/bold magenta]", end="\n# ", style=Style(color="bright_green"))
 
 # clear console 
 def clear(*args):
@@ -355,7 +358,7 @@ def main():
     console.clear()
     console.print("="*70, style="bold blue")
     console.print("Welcome to PyShell", style="bold yellow", end=" ")
-    console.print("{Python CLI by @ansh.mn.soni}", style="magenta")
+    console.print("{Python CLI by @ansh.mn.soni}", style="white")
     console.print(f"System: {platform.system()} {platform.release()} ", style="bold cyan")
     console.print("="*70, style="bold blue")
 
