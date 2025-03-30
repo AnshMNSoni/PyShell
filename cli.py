@@ -256,7 +256,7 @@ def execute_command(args):
 
     if command_name in commands:
         try:
-            commands[command_name](*command_args)  # Execute predefined command
+            commands[command_name](*command_args) 
         except TypeError as e:
             console.print(f"[bold red]Error executing command '{command_name}': {e}[/bold red]")
     else:
@@ -291,7 +291,7 @@ def schedule_task(args):
             return
     
         console.print(f"[bold green]Running scheduled task:[/bold green] {command}")
-        cmd_parts = shlex.split(command)  # Correctly parse arguments with quotes
+        cmd_parts = shlex.split(command)
         execute_command(cmd_parts)
 
     if unit in ["seconds", "minutes", "hours"]:
@@ -314,7 +314,7 @@ def run_scheduler():
     """Continuously runs pending scheduled tasks in the background."""
     while True:
         schedule.run_pending()
-        time.sleep(1)  # Adjust sleep time if needed
+        time.sleep(1)  
 
 
 def list_scheduled_tasks(_):
@@ -354,8 +354,8 @@ def clear(*args):
 def main():
     console.clear()
     console.print("="*70, style="bold blue")
-    console.print("Welcome to PyCLI", style="bold yellow", end=" ")
-    console.print("{Python Command Line Interface by ansh.mn.soni}", style="magenta")
+    console.print("Welcome to PyShell", style="bold yellow", end=" ")
+    console.print("{Python CLI by @ansh.mn.soni}", style="magenta")
     console.print(f"System: {platform.system()} {platform.release()} ", style="bold cyan")
     console.print("="*70, style="bold blue")
 
