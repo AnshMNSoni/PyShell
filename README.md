@@ -1,10 +1,10 @@
 # PyShell - Python Based CLI 
 ### (developed by @ansh.mn.soni)
 
-## Introduction:
+## 👉 Introduction:
 PyShell is a custom-built command-line interface (CLI) that serves as a lightweight yet powerful terminal, developed using Python. It allows users to interact with their system, manage files, process system commands, and perform various utility functions. With a focus on simplicity, speed, and usability, PyShell enhances the standard terminal experience by integrating automation, process management, and network utilities.
 
-## Key Advantages:
+## 🔑 Key Advantages:
 
 #### 0️⃣ User Login for Security
 Preview </br></br>
@@ -45,7 +45,7 @@ Preview </br></br>
 Preview </br></br>
 ![image](https://github.com/user-attachments/assets/67769091-4d4a-471a-b2fc-1a31753da9c9)
 
-## How to use:
+## 🧑‍💻 How to use:
 1️⃣ Clone the Repository:</br>
 ```sh
 git clone https://github.com/AnshMNSoni/PyShell.git
@@ -58,7 +58,7 @@ pip install -r requirements.txt
 
 3️⃣ SignUp to Open Weather For weather API: [Visit](https://openweathermap.org/)
 
-4️⃣ Replace you API_KEY:</br>
+4️⃣ Replace you API_KEY:
 - Inside `get_weather` function
 - api_key = "YOUR_API_KEY" </br>
 
@@ -74,7 +74,7 @@ python cli.py
 ## 🔎 Future Work:
 1️⃣ Upscale it to the Operating system (i.e. MyOS)
 
-## Contributing to PyShell
+## 🤝 Contributing to PyShell
 
 Thank you for considering contributing! Please follow these steps:
 
@@ -84,7 +84,7 @@ Thank you for considering contributing! Please follow these steps:
 4. **Push to your fork** (`git push origin feature-branch`).
 5. **Submit a Pull Request** and wait for review.
 
-### Connect with Me:
+### 🔗 Connect with Me:
 `GitHub` - [Visit](https://github.com/AnshMNSoni) </br>
 `LinkedIn` - [Visit](https://linkedin.com/in/anshsoni)
 
