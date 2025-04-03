@@ -17,6 +17,7 @@ from rich.style import Style
 from weather import Weather
 from task import Task
 from commands import Commands
+from git_commands import Git
 
 console = Console()
 USER_FILE = "users.json"
@@ -144,7 +145,33 @@ def main():
         "unschedule": Task().remove_scheduled_task,
         "stop": Task().stop_running_tasks,
         "cls": clear,
-        "exit": lambda _: exit()
+        "exit": lambda _: exit(),
+        
+        # Git Commands (Using Git Class)
+        "git_status": Git().git_status,
+        "git_branches": Git().git_branches,
+        "git_create": Git().git_create_branch,
+        "git_switch": Git().git_switch_branch,
+        "git_push": Git().git_push,
+        "git_pull": Git().git_pull,
+        "git_merge": Git().git_merge,
+        "git_delete": Git().git_delete_branch,
+        "git_clone": Git().git_clone,
+        "git_add": Git().git_add, 
+        "git_commit": Git().git_commit,
+        
+        # Unique Git Features
+        "git_smart": Git().git_smart_commit,
+        "git_help": Git().git_help,
+        "git_history": Git().git_history,
+        "git_undo": Git().git_undo,
+        "git_stash": Git().git_stash,
+        "git_recover": Git().git_recover,
+        "git_dashboard": Git().git_dashboard,
+        "git_auto_merge": Git().git_auto_merge,
+        "git_voice": Git().git_voice_command,
+        "git_reminder": Git().git_reminder,
+        "git_offline_sync": Git().git_offline_sync
     }
     
     scheduler_thread = threading.Thread(target=Task().run_scheduler, daemon=True)
