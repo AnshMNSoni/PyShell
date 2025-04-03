@@ -35,16 +35,16 @@ class Git:
     def git_create_branch(self, args):
         """Creates a new Git branch."""
         if not args:
-            console.print("Usage: git branch <branch_name>", style="bold red")
-            console.print("Example: git branch feature-branch", style="bold yellow")
+            console.print("Usage: git_branch <branch_name>", style="bold red")
+            console.print("Example: git_branch feature-branch", style="bold yellow")
             return
         self.run_git_command(f"git branch {args[0]}", "git branch <branch_name>", "git branch feature-branch")
 
     def git_switch_branch(self, args):
         """Switches to an existing Git branch."""
         if not args:
-            console.print("Usage: git checkout <branch_name>", style="bold red")
-            console.print("Example: git checkout main", style="bold yellow")
+            console.print("Usage: git_switch <branch_name>", style="bold red")
+            console.print("Example: git_switch main", style="bold yellow")
             return
         self.run_git_command(f"git checkout {args[0]}", "git checkout <branch_name>", "git checkout main")
 
@@ -276,23 +276,23 @@ class Git:
         """Displays available Git commands and their usage."""
         help_text = """
         Available Git Commands:
-        - git status : Show working tree status
-        - git branch : List branches
-        - git checkout <branch> : Switch branches
-        - git push origin <branch> : Push branch to remote
-        - git pull origin <branch> : Pull latest changes
-        - git merge <branch> : Merge branch into current
-        - git clone <repo_url> : Clone a repository
-        - git add <file> : Stage file for commit
-        - git commit -m "<message>" : Commit staged files
-        - git smart : AI-powered commit messages
-        - git undo : Undo last operation
-        - git dashboard : Open web dashboard
-        - git auto_merge : Auto resolve conflicts
-        - git voice : Voice command for Git
-        - git reminder : Alerts for uncommitted changes
-        - git social_share : Share commits on social media
-        - git offline_sync : Sync offline commits when online
+        - git_status : Show working tree status
+        - git_branches : List branches
+        - git_switch <branch> : Switch branches
+        - git_push origin <branch> : Push branch to remote
+        - git_pull origin <branch> : Pull latest changes
+        - git_merge <branch> : Merge branch into current
+        - git_clone <repo_url> : Clone a repository
+        - git_add <file> : Stage file for commit
+        - git_commit -m "<message>" : Commit staged files
+        - git_smart : AI-powered commit messages
+        - git_undo : Undo last operation
+        - git_dashboard : Open web dashboard
+        - git_auto_merge : Auto resolve conflicts
+        - git_voice : Voice command for Git
+        - git_reminder : Alerts for uncommitted changes
+        - git_social_share : Share commits on social media
+        - git_offline_sync : Sync offline commits when online
         """
         console.print(help_text, style="bold cyan")
         
