@@ -157,8 +157,21 @@ def main():
         "git_merge": Git().git_merge,
         "git_delete": Git().git_delete_branch,
         "git_clone": Git().git_clone,
-        "git add": Git().git_add, 
-        "git commit": Git().git_commit  
+        "git_add": Git().git_add, 
+        "git_commit": Git().git_commit,
+        
+        # Unique Git Features
+        "git_smart": Git().git_smart_commit,
+        "git_help": Git().git_help,
+        "git_history": Git().git_history,
+        "git_undo": Git().git_undo,
+        "git_stash": Git().git_stash,
+        "git_recover": Git().git_recover,
+        "git_dashboard": Git().git_dashboard,
+        "git_auto_merge": Git().git_auto_merge,
+        "git_voice": Git().git_voice_command,
+        "git_reminder": Git().git_reminder,
+        "git_offline_sync": Git().git_offline_sync
     }
     
     scheduler_thread = threading.Thread(target=Task().run_scheduler, daemon=True)
