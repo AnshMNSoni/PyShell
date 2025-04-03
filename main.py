@@ -16,7 +16,7 @@ from rich.style import Style
 # dependencies
 from weather import Weather
 from task import Task
-from commands import Commands
+from linux_commands import Commands
 from git_commands import Git
 
 console = Console()
@@ -139,6 +139,7 @@ def main():
         "paste": clipboard_paste,
         "password": generate_password,
         "calc": Commands().calculator,
+        "math-help": Commands().math_help,
         "weather": Weather().get_weather,
         "schedule": Task().schedule_task,  
         "tasks": Task().list_scheduled_tasks,  
