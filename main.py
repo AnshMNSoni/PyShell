@@ -163,7 +163,7 @@ def main():
         
         # Unique Git Features
         "git_smart": Git().git_smart_commit,
-        "git_help": Git().git_help,
+        "git-help": Git().git_help,
         "git_history": Git().git_history,
         "git_undo": Git().git_undo,
         "git_stash": Git().git_stash,
