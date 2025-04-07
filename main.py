@@ -8,11 +8,12 @@ import random
 import string
 import threading
 import time
+import subprocess
 from datetime import datetime
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.text import Text
-from rich.style import Style
+# from rich.style import Style
 
 # dependencies
 from weather import Weather
@@ -138,7 +139,16 @@ def display_prompt(username):
     right_prompt = Text()
     right_prompt.append("", style="black on medium_sea_green")
     right_prompt.append("   ", style="black on medium_sea_green")  # GitHub icon
-    right_prompt.append(" main ≡ ⎔ ~1 ", style="black on medium_sea_green")
+    # Get current git branch
+    try:
+        branch = subprocess.check_output(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+            stderr=subprocess.DEVNULL
+        ).decode("utf-8").strip()
+    except subprocess.CalledProcessError:
+        branch = "no-branch"
+
+    right_prompt.append(f" {branch} ≡ ⎔ ~1 ", style="black on medium_sea_green")
 
     # Display left and right segments on the same line
     console.print(left_prompt + Text(" " * (console.width - len(left_prompt.plain) - len(right_prompt.plain))) + right_prompt)
