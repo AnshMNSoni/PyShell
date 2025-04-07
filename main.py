@@ -11,6 +11,7 @@ import time
 from datetime import datetime
 from rich.console import Console
 from rich.prompt import Prompt
+from rich.text import Text
 from rich.style import Style
 
 # dependencies
@@ -104,12 +105,43 @@ def generate_password(*args):
     console.print(f"Generated Password: {password}", style="bold green")
     clipboard_copy(password)
 
-# display prompt 
 def display_prompt(username):
     hostname = platform.node()
-    cwd = os.getcwd()
-    time_str = datetime.now().strftime("%H:%M:%S")
-    console.print(f"\n[bold cyan]👤 {username}@{hostname}[/bold cyan] [yellow]~ {cwd}[/yellow]  [bold magenta]{time_str}[/bold magenta]", end="\n# ", style=Style(color="bright_green"))
+    cwd = os.getcwd().split(os.sep)
+    time_str = datetime.now().strftime("%H:%M")
+    
+    # Memory usage
+    mem = psutil.virtual_memory()
+    mem_percent = mem.percent
+    mem_total_gb = round(mem.total / (1024 ** 3))
+    mem_used_gb = round(mem.used / (1024 ** 3))
+
+    # Left aligned segments
+    left_prompt = Text()
+    left_prompt.append(" ⮞ ", style="black on white")
+    left_prompt.append(" shell ", style="white on blue")
+    left_prompt.append("", style="blue on black")
+    left_prompt.append(f" MEM: {mem_percent}% ↑ {mem_used_gb}/{mem_total_gb}GB ", style="white on blue")
+    left_prompt.append("", style="blue on grey15")
+    left_prompt.append(" 0ms ", style="white on grey15")
+    left_prompt.append("", style="grey15 on black")
+    left_prompt.append(f" {time_str} ", style="white on black")
+    
+    # Folder breadcrumbs
+    for part in cwd:
+        if part:
+            left_prompt.append(" ➜ ", style="white")
+            left_prompt.append("📁", style="white")
+            left_prompt.append(f" {part} ", style="white")
+    
+    # Right aligned Git segment
+    right_prompt = Text()
+    right_prompt.append("", style="black on medium_sea_green")
+    right_prompt.append("   ", style="black on medium_sea_green")  # GitHub icon
+    right_prompt.append(" main ≡ ⎔ ~1 ", style="black on medium_sea_green")
+
+    # Display left and right segments on the same line
+    console.print(left_prompt + Text(" " * (console.width - len(left_prompt.plain) - len(right_prompt.plain))) + right_prompt)
 
 # clear console 
 def clear(*args):
