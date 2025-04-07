@@ -122,6 +122,7 @@ def display_prompt(username):
     left_prompt.append(" ⮞ ", style="black on white")
     left_prompt.append(" shell ", style="white on blue")
     left_prompt.append("", style="blue on black")
+    left_prompt.append("", style="black on blue")
     left_prompt.append(f" MEM: {mem_percent}% ↑ {mem_used_gb}/{mem_total_gb}GB ", style="white on blue")
     left_prompt.append("", style="blue on grey15")
     left_prompt.append(" 0ms ", style="white on grey15")
@@ -139,6 +140,7 @@ def display_prompt(username):
     right_prompt = Text()
     right_prompt.append("", style="black on medium_sea_green")
     right_prompt.append("   ", style="black on medium_sea_green")  # GitHub icon
+    
     # Get current git branch
     try:
         branch = subprocess.check_output(
