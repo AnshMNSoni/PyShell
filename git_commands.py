@@ -276,23 +276,23 @@ class Git:
         """Displays available Git commands and their usage."""
         help_text = """
         Available Git Commands:
-        - git_status : Show working tree status
-        - git_branches : List branches
-        - git_switch <branch> : Switch branches
-        - git_push origin <branch> : Push branch to remote
-        - git_pull origin <branch> : Pull latest changes
-        - git_merge <branch> : Merge branch into current
-        - git_clone <repo_url> : Clone a repository
-        - git_add <file> : Stage file for commit
-        - git_commit -m "<message>" : Commit staged files
-        - git_smart : AI-powered commit messages
-        - git_undo : Undo last operation
-        - git_dashboard : Open web dashboard
-        - git_auto_merge : Auto resolve conflicts
-        - git_voice : Voice command for Git
-        - git_reminder : Alerts for uncommitted changes
-        - git_social_share : Share commits on social media
-        - git_offline_sync : Sync offline commits when online
+        - git-status : Show working tree status
+        - git-branches : List branches
+        - git-switch <branch> : Switch branches
+        - git-push origin <branch> : Push branch to remote
+        - git-pull origin <branch> : Pull latest changes
+        - git-merge <branch> : Merge branch into current
+        - git-clone <repo_url> : Clone a repository
+        - git-add <file> : Stage file for commit
+        - git-commit -m "<message>" : Commit staged files
+        - git-smart : AI-powered commit messages
+        - git-undo : Undo last operation
+        - git-dashboard : Open web dashboard
+        - git-auto_merge : Auto resolve conflicts
+        - git-voice : Voice command for Git
+        - git-reminder : Alerts for uncommitted changes
+        - git-social_share : Share commits on social media
+        - git-offline_sync : Sync offline commits when online
         """
         console.print(help_text, style="bold cyan")
         
