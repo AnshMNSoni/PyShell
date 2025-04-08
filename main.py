@@ -13,13 +13,13 @@ from datetime import datetime
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.text import Text
-# from rich.style import Style
 
 # dependencies
 from weather import Weather
 from task import Task
 from linux_commands import Commands
 from git_commands import Git
+from terminals import Terminal
 
 console = Console()
 USER_FILE = "users.json"
@@ -27,7 +27,8 @@ lock = threading.Lock()
 
 scheduled_jobs = {}
 commands = {} 
-stop_scheduler = False 
+stop_scheduler = False
+prompt_flag = True
 
 # Load users
 def load_users():
@@ -106,56 +107,58 @@ def generate_password(*args):
     console.print(f"Generated Password: {password}", style="bold green")
     clipboard_copy(password)
 
+
+# changing and displaying terminal 
+terminal = Terminal()
+
 def display_prompt(username):
-    hostname = platform.node()
-    cwd = os.getcwd().split(os.sep)
-    time_str = datetime.now().strftime("%H:%M")
-    
-    # Memory usage
-    mem = psutil.virtual_memory()
-    mem_percent = mem.percent
-    mem_total_gb = round(mem.total / (1024 ** 3))
-    mem_used_gb = round(mem.used / (1024 ** 3))
+    if terminal.get_prompt_flag():  # Use the getter here
+        hostname = platform.node()
+        cwd = os.getcwd().split(os.sep)
+        time_str = datetime.now().strftime("%H:%M")
 
-    # Left aligned segments
-    left_prompt = Text()
-    left_prompt.append("\n # ", style="black on white")
-    left_prompt.append(" shell ", style="white on blue")
-    left_prompt.append("", style="blue on black")
-    left_prompt.append("", style="black on blue")
-    left_prompt.append(f" MEM: {mem_percent}% ↑ {mem_used_gb}/{mem_total_gb}GB ", style="white on blue")
-    left_prompt.append("", style="blue on grey15")
-    left_prompt.append(" code ", style="white on grey15")
-    left_prompt.append("", style="grey15 on black")
-    left_prompt.append(f" {time_str} ", style="white on black")
-    left_prompt.append("", style="black")
-    
-    # Folder breadcrumbs
-    for part in cwd:
-        if part:
-            left_prompt.append(" // ", style="white")
-            left_prompt.append("📁", style="white")
-            left_prompt.append(f" {part} ", style="white")
-    
-    # Right aligned Git segment
-    right_prompt = Text()
-    right_prompt.append("", style="black on medium_sea_green")
-    right_prompt.append("   ", style="black on medium_sea_green")  # GitHub icon
-    
-    # Get current git branch
-    try:
-        branch = subprocess.check_output(
-            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
-            stderr=subprocess.DEVNULL
-        ).decode("utf-8").strip()
-    except subprocess.CalledProcessError:
-        branch = "no-branch"
+        mem = psutil.virtual_memory()
+        mem_percent = mem.percent
+        mem_total_gb = round(mem.total / (1024 ** 3))
+        mem_used_gb = round(mem.used / (1024 ** 3))
 
-    right_prompt.append(f" {branch} ≡ ⎔ ~1 ", style="black on medium_sea_green")
+        left_prompt = Text()
+        left_prompt.append("\n # ", style="black on white")
+        left_prompt.append(" shell ", style="white on blue")
+        left_prompt.append("", style="blue on black")
+        left_prompt.append("", style="black on blue")
+        left_prompt.append(f" MEM: {mem_percent}% ↑ {mem_used_gb}/{mem_total_gb}GB ", style="white on blue")
+        left_prompt.append("", style="blue on grey15")
+        left_prompt.append(" code ", style="white on grey15")
+        left_prompt.append("", style="grey15 on black")
+        left_prompt.append(f" {time_str} ", style="white on black")
+        left_prompt.append("", style="black")
 
-    # Display left and right segments on the same line
-    console.print(left_prompt + Text(" " * (console.width - len(left_prompt.plain) - len(right_prompt.plain))) + right_prompt)
+        for part in cwd:
+            if part:
+                left_prompt.append(" // ", style="white")
+                left_prompt.append("📁", style="white")
+                left_prompt.append(f" {part} ", style="white")
 
+        right_prompt = Text()
+        right_prompt.append("", style="black on medium_sea_green")
+        right_prompt.append("   ", style="black on medium_sea_green")
+
+        try:
+            branch = subprocess.check_output(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                stderr=subprocess.DEVNULL
+            ).decode("utf-8").strip()
+        except subprocess.CalledProcessError:
+            branch = "no-branch"
+
+        right_prompt.append(f" {branch} ≡ ⎔ ~1 ", style="black on medium_sea_green")
+
+        console.print(left_prompt + Text(" " * (console.width - len(left_prompt.plain) - len(right_prompt.plain))) + right_prompt)
+    else:
+        console.print(terminal.get_prompt())  # Use prompt returned from Terminal
+       
+    
 # clear console 
 def clear(*args):
     console.print("="*70, style="bold blue")
@@ -191,6 +194,7 @@ def main():
         "unschedule": Task().remove_scheduled_task,
         "stop": Task().stop_running_tasks,
         "cls": clear,
+        "terminal": Terminal().change_terminal,
         "exit": lambda _: exit(),
         
         # Git Commands (Using Git Class)
