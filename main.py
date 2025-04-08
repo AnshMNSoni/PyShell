@@ -119,20 +119,21 @@ def display_prompt(username):
 
     # Left aligned segments
     left_prompt = Text()
-    left_prompt.append(" ⮞ ", style="black on white")
+    left_prompt.append("\n # ", style="black on white")
     left_prompt.append(" shell ", style="white on blue")
     left_prompt.append("", style="blue on black")
     left_prompt.append("", style="black on blue")
     left_prompt.append(f" MEM: {mem_percent}% ↑ {mem_used_gb}/{mem_total_gb}GB ", style="white on blue")
     left_prompt.append("", style="blue on grey15")
-    left_prompt.append(" 0ms ", style="white on grey15")
+    left_prompt.append(" code ", style="white on grey15")
     left_prompt.append("", style="grey15 on black")
     left_prompt.append(f" {time_str} ", style="white on black")
+    left_prompt.append("", style="black")
     
     # Folder breadcrumbs
     for part in cwd:
         if part:
-            left_prompt.append(" ➜ ", style="white")
+            left_prompt.append(" // ", style="white")
             left_prompt.append("📁", style="white")
             left_prompt.append(f" {part} ", style="white")
     
