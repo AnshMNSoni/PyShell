@@ -112,7 +112,7 @@ def generate_password(*args):
 terminal = Terminal()
 
 def display_prompt(username):
-    if terminal.get_prompt_flag():  # Use the getter here
+    if terminal.get_prompt_flag(): 
         hostname = platform.node()
         cwd = os.getcwd().split(os.sep)
         time_str = datetime.now().strftime("%H:%M")
