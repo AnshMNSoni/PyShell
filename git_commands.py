@@ -50,11 +50,14 @@ class Git:
 
     def git_push(self, args):
         """Pushes the current branch to remote."""
-        if not args:
-            console.print("Usage: git push origin <branch_name>", style="bold red")
-            console.print("Example: git push origin main", style="bold yellow")
+        if len(args) < 2 or args[0] != "origin":
+            console.print("[bold red]Usage:[/] git push origin <branch_name>")
+            console.print("[bold yellow]Example:[/] git push origin main")
             return
-        self.run_git_command(f"git push origin {args[0]}", "git push origin <branch_name>", "git push origin main")
+
+        branch_name = args[1]
+        command = f"git push origin {branch_name}"
+        self.run_git_command(command, "git push origin <branch_name>", "git push origin main")
 
     def git_pull(self, args):
         """Pulls the latest changes from a remote branch."""
