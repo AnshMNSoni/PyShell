@@ -30,6 +30,7 @@ scheduled_jobs = {}
 commands = {} 
 stop_scheduler = False
 prompt_flag = True
+current_terminal_layout = 1
 
 # Load users
 def load_users():
@@ -157,6 +158,8 @@ def display_prompt(username):
 
         console.print(left_prompt + Text(" " * (console.width - len(left_prompt.plain) - len(right_prompt.plain))) + right_prompt)
     else:
+        if current_terminal_layout == 3:  # use a global or config flag for current layout
+            Commands().terminal_3()
         console.print(terminal.get_prompt())  # Use prompt returned from Terminal
        
     

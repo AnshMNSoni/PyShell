@@ -240,6 +240,10 @@ class Terminal:
     def change_terminal(self, *args):
         global prompt_flag
         prompt_flag = False
+        
+        global current_terminal_layout
+        current_terminal_layout = current_terminal
+        
         self.set_prompt_flag(False)  # Update the flag globally
         console.print("\nChoose Terminal Layout:", style="bold blue")
         console.print("[1] Solarized Night")
