@@ -28,6 +28,7 @@ class Terminal:
         global prompt_flag
         return prompt_flag
 
+
     def terminal_1(self):
         cwd = os.getcwd().split(os.sep)
         time_str = datetime.now().strftime("%H:%M")
@@ -55,6 +56,7 @@ class Terminal:
         prompt = left + Text(" " * (console.width - len(left.plain) - len(right.plain))) + right
         self.set_prompt(prompt)
         return prompt
+    
 
     def terminal_2(self):
         cwd = os.getcwd().split(os.sep)
@@ -82,6 +84,7 @@ class Terminal:
         prompt = left + Text(" " * (console.width - len(left.plain) - len(right.plain))) + right
         self.set_prompt(prompt)
         return prompt
+    
     
     def terminal_3(self):
     # Extract current working directory
@@ -121,6 +124,7 @@ class Terminal:
         prompt = left + right
         self.set_prompt(prompt)
         return prompt
+    
     
     def terminal_4(self):
         # Get current folder
@@ -163,6 +167,15 @@ class Terminal:
         self.set_prompt(prompt)
         return prompt
 
+
+    def terminal_5(self):
+        pass
+    
+    
+    def terminal_6(self):
+        pass
+    
+    
     def terminal_7(self):
         cwd = os.getcwd().split(os.sep)
         time_str = datetime.now().strftime("%H:%M")
@@ -208,6 +221,19 @@ class Terminal:
         prompt = left_prompt + Text(" " * (console.width - len(left_prompt.plain) - len(right_prompt.plain))) + right_prompt
         self.set_prompt(prompt)
         return prompt
+    
+    
+    def terminal_8(self):
+        pass
+    
+    
+    def terminal_9(self):
+        pass
+    
+    
+    def terminal_10(self):
+        pass
+
 
     def change_terminal(self, *args):
         global prompt_flag
