@@ -10,6 +10,7 @@ from rich.prompt import Prompt
 console = Console()
 prompt = None
 prompt_flag = True
+current_terminal_layout = 1
 
 class Terminal:
     def set_prompt(self, value):
