@@ -89,12 +89,13 @@ class Terminal:
     def terminal_3(self):
         # Extract current working directory
         cwd = os.getcwd().split(os.sep)
-        
+
+        # Updated branch logic (as in terminal_7)
         try:
             branch = subprocess.check_output(
                 ["git", "rev-parse", "--abbrev-ref", "HEAD"],
                 stderr=subprocess.DEVNULL
-            ).decode().strip()
+            ).decode("utf-8").strip()
         except subprocess.CalledProcessError:
             branch = "no-branch"
 
@@ -113,7 +114,7 @@ class Terminal:
                 left.append(f" {part} ", style="white on blue")
                 left.append("", style="blue on black")
 
-        # Build right segment (branch name)
+        # Right segment with original terminal_3() styling, just updated logic
         right = Text()
         right.append("", style="black on green")
         right.append(f"  {branch} ", style="black on green")
