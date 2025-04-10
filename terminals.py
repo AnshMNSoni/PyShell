@@ -90,15 +90,6 @@ class Terminal:
         # Extract current working directory
         cwd = os.getcwd().split(os.sep)
 
-        # Updated branch logic (as in terminal_7)
-        try:
-            branch = subprocess.check_output(
-                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
-                stderr=subprocess.DEVNULL
-            ).decode("utf-8").strip()
-        except subprocess.CalledProcessError:
-            branch = "no-branch"
-
         hostname = platform.node()
         # Build left segment
         left = Text()
@@ -114,9 +105,18 @@ class Terminal:
                 left.append(f" {part} ", style="white on blue")
                 left.append("", style="blue on black")
 
-        # Right segment with original terminal_3() styling, just updated logic
+        # Build right segment (branch name)
         right = Text()
         right.append("", style="black on green")
+            
+        try:
+            branch = subprocess.check_output(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                stderr=subprocess.DEVNULL
+            ).decode("utf-8").strip()
+        except subprocess.CalledProcessError:
+            branch = "no-branch"
+            
         right.append(f"  {branch} ", style="black on green")
         right.append("", style="green on black")
 
