@@ -21,6 +21,7 @@ from linux_commands import Commands
 from git_commands import Git
 from terminals import Terminal
 from song import Song
+from config import current_terminal_layout
 
 console = Console()
 USER_FILE = "users.json"
@@ -159,7 +160,7 @@ def display_prompt(username):
         console.print(left_prompt + Text(" " * (console.width - len(left_prompt.plain) - len(right_prompt.plain))) + right_prompt)
     else:
         if current_terminal_layout == 3:  # use a global or config flag for current layout
-            Commands().terminal_3()
+            Terminal().terminal_3()
         console.print(terminal.get_prompt())  # Use prompt returned from Terminal
        
     

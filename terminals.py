@@ -7,6 +7,9 @@ from rich.text import Text
 from rich.console import Console
 from rich.prompt import Prompt
 
+# dependencies
+from config import current_terminal_layout
+
 console = Console()
 prompt = None
 prompt_flag = True
@@ -241,7 +244,6 @@ class Terminal:
         global prompt_flag
         prompt_flag = False
         
-        global current_terminal_layout
         
         self.set_prompt_flag(False)  # Update the flag globally
         console.print("\nChoose Terminal Layout:", style="bold blue")
@@ -258,6 +260,7 @@ class Terminal:
         choice = Prompt.ask("Enter layout number", choices=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], default="1")
     
         current_terminal = int(choice)
+        global current_terminal_layout
         current_terminal_layout = current_terminal
         console.clear()
         console.print(f"Terminal switched to layout {choice}!", style="bold green")
