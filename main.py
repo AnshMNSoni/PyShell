@@ -161,9 +161,7 @@ def display_prompt(username):
     
 # clear console 
 def clear(*args):
-    console.print("="*70, style="bold blue")
-    display_prompt(username)
-    console.clear()
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def main():
     console.clear()
