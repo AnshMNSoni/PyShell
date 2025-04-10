@@ -158,8 +158,27 @@ def display_prompt(username):
 
         console.print(left_prompt + Text(" " * (console.width - len(left_prompt.plain) - len(right_prompt.plain))) + right_prompt)
     else:
-        if config.current_terminal_layout == 3:  # use a global or config flag for current layout
+        if config.current_terminal_layout == 1:  
+            Terminal().terminal_1()
+        elif config.current_terminal_layout == 2:
+            Terminal().terminal_2()
+        elif config.current_terminal_layout == 3:
             Terminal().terminal_3()
+        elif config.current_terminal_layout == 4:
+            Terminal().terminal_4()
+        elif config.current_terminal_layout == 5:
+            Terminal().terminal_5()
+        elif config.current_terminal_layout == 6:
+            Terminal().terminal_6()
+        elif config.current_terminal_layout == 7:
+            Terminal().terminal_7()
+        elif config.current_terminal_layout == 8:
+            Terminal().terminal_8()
+        elif config.current_terminal_layout == 9:
+            Terminal().terminal_9()
+        elif config.current_terminal_layout == 10:
+            Terminal().terminal_10()
+            
         console.print(terminal.get_prompt())  # Use prompt returned from Terminal
        
     
