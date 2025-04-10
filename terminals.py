@@ -87,7 +87,7 @@ class Terminal:
     
     
     def terminal_3(self):
-    # Extract current working directory
+        # Extract current working directory
         cwd = os.getcwd().split(os.sep)
         
         try:
@@ -116,15 +116,6 @@ class Terminal:
         # Build right segment (branch name)
         right = Text()
         right.append("", style="black on green")
-        
-        try:
-            branch = subprocess.check_output(
-                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
-                stderr=subprocess.DEVNULL
-            ).decode("utf-8").strip()
-        except subprocess.CalledProcessError:
-            branch = "no-branch"
-            
         right.append(f"  {branch} ", style="black on green")
         right.append("", style="green on black")
 
