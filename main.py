@@ -31,7 +31,6 @@ scheduled_jobs = {}
 commands = {} 
 stop_scheduler = False
 prompt_flag = True
-current_terminal_layout = 1
 
 # Load users
 def load_users():
