@@ -6,9 +6,7 @@ from datetime import datetime
 from rich.text import Text
 from rich.console import Console
 from rich.prompt import Prompt
-
-# dependencies
-from config import current_terminal_layout
+import config
 
 console = Console()
 prompt = None
@@ -259,8 +257,7 @@ class Terminal:
         choice = Prompt.ask("Enter layout number", choices=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], default="1")
     
         current_terminal = int(choice)
-        global current_terminal_layout
-        current_terminal_layout = current_terminal
+        config.current_terminal_layout = current_terminal
         console.clear()
         console.print(f"Terminal switched to layout {choice}!", style="bold green")
     
