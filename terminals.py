@@ -1,4 +1,5 @@
 import os
+import time
 import psutil
 import subprocess
 import platform
@@ -174,7 +175,10 @@ class Terminal:
     def terminal_5(self):
         folder = os.path.basename(os.getcwd())
 
-        # Get git branch and change count
+        # Start timer
+        start_time = time.time()
+
+        # Git branch
         try:
             branch = subprocess.check_output(
                 ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
@@ -183,6 +187,7 @@ class Terminal:
         except subprocess.CalledProcessError:
             branch = "no-branch"
 
+        # Git status
         try:
             status_output = subprocess.check_output(
                 ["git", "status", "--porcelain"],
@@ -192,39 +197,40 @@ class Terminal:
         except subprocess.CalledProcessError:
             changes = 0
 
-        # Get system memory stats
+        # End timer
+        end_time = time.time()
+        exec_time_ms = int((end_time - start_time) * 1000)
+
+        # Memory usage
         mem = psutil.virtual_memory()
-        used = mem.used / (1024**3)
-        total = mem.total / (1024**3)
         used_percent = mem.percent
+        used = mem.used // (1024 ** 3)
+        total = mem.total // (1024 ** 3)
 
-        # Create prompt text
-        p = Text()
+        # Build left side of prompt
+        left = Text()
+        left.append("\n", style="white on #DCDCDC")
+        left.append("  shell ", style="black on #DCDCDC")
+        left.append("", style="#DCDCDC on black")
+        left.append("", style="black on #4682B4")
+        left.append(f" MEM: {used_percent:.2f}% ", style="white on #4682B4")
+        left.append(f" {used}/{total}GB ", style="white on #4682B4")
+        left.append("", style="#4682B4 on grey30")
+        left.append(f" {exec_time_ms}ms ", style="white on grey30")
+        left.append("", style="grey30 on black")
+        left.append(f" → {folder} ", style="white on black")
 
-        # Shell label
-        p.append("", style="white on #DCDCDC")
-        p.append("  shell ", style="black on #DCDCDC")
-        p.append("", style="#DCDCDC on #4682B4")
+        # Build right side of prompt
+        right = Text()
+        right.append("", style="bright_cyan on black")
+        right.append(f"  {branch} = ", style="black on bright_cyan")
+        right.append(f" {changes} ", style="black on bright_cyan")
 
-        # Memory usage bar
-        p.append(f" MEM: {used_percent:.2f}% ", style="white on #4682B4")
-        p.append(f" {int(used)}/{int(total)}GB ", style="white on #4682B4")
-        p.append("", style="#4682B4 on grey30")
-
-        # Time taken (just showing 0ms here, but could track command exec time)
-        p.append(" 0ms ", style="white on grey30")
-        p.append("", style="grey30 on black")
-
-        # Folder path
-        p.append(f" → {folder} ", style="white on black")
-
-        # Git info block (on right, for visual)
-        p.append("", style="bright_cyan on black")
-        p.append(f"  {branch} = ", style="black on bright_cyan")
-        p.append(f" {changes} ", style="black on bright_cyan")
+        # Combine with spacing
+        space = " " * max(console.width - len(left.plain) - len(right.plain), 1)
         
         global prompt
-        prompt = p
+        prompt = left + Text(space) + right
         self.set_prompt(prompt)
         return prompt
 
@@ -302,7 +308,7 @@ class Terminal:
         console.print("[2] Hacker Green")
         console.print("[3] Agnoster")
         console.print("[4] Marcduiker")
-        console.print("[5] ")
+        console.print("[5] Clean Detailed")
         console.print("[6] ")
         console.print("[7] PyShell Default")
         console.print("[8] ")
