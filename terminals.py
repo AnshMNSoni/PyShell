@@ -172,8 +172,62 @@ class Terminal:
 
 
     def terminal_5(self):
-        pass
-    
+        folder = os.path.basename(os.getcwd())
+
+        # Get git branch and change count
+        try:
+            branch = subprocess.check_output(
+                ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                stderr=subprocess.DEVNULL
+            ).decode().strip()
+        except subprocess.CalledProcessError:
+            branch = "no-branch"
+
+        try:
+            status_output = subprocess.check_output(
+                ["git", "status", "--porcelain"],
+                stderr=subprocess.DEVNULL
+            ).decode().strip()
+            changes = len(status_output.splitlines())
+        except subprocess.CalledProcessError:
+            changes = 0
+
+        # Get system memory stats
+        mem = psutil.virtual_memory()
+        used = mem.used / (1024**3)
+        total = mem.total / (1024**3)
+        used_percent = mem.percent
+
+        # Create prompt text
+        p = Text()
+
+        # Shell label
+        p.append("", style="white on #DCDCDC")
+        p.append("  shell ", style="black on #DCDCDC")
+        p.append("", style="#DCDCDC on #4682B4")
+
+        # Memory usage bar
+        p.append(f" MEM: {used_percent:.2f}% ", style="white on #4682B4")
+        p.append(f" {int(used)}/{int(total)}GB ", style="white on #4682B4")
+        p.append("", style="#4682B4 on grey30")
+
+        # Time taken (just showing 0ms here, but could track command exec time)
+        p.append(" 0ms ", style="white on grey30")
+        p.append("", style="grey30 on black")
+
+        # Folder path
+        p.append(f" → {folder} ", style="white on black")
+
+        # Git info block (on right, for visual)
+        p.append("", style="bright_cyan on black")
+        p.append(f"  {branch} = ", style="black on bright_cyan")
+        p.append(f" {changes} ", style="black on bright_cyan")
+        
+        global prompt
+        prompt = p
+        self.set_prompt(prompt)
+        return prompt
+
     
     def terminal_6(self):
         pass
