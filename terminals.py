@@ -103,7 +103,7 @@ class Terminal:
         left = Text()
         left.append("\n", style="green")
         left.append("", style="black")
-        left.append(f" #{hostname} ", style="black on white")
+        left.append(f" {hostname} ", style="black on white")
         left.append("", style="white on black")
 
         # Build middle segment (folder path)
