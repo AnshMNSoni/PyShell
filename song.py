@@ -1,6 +1,5 @@
 import requests
 import webbrowser
-import sys
 from rich.console import Console
 
 console = Console()
