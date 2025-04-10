@@ -20,6 +20,7 @@ from task import Task
 from linux_commands import Commands
 from git_commands import Git
 from terminals import Terminal
+from song import Song
 
 console = Console()
 USER_FILE = "users.json"
@@ -205,10 +206,11 @@ def main():
         "git-merge": Git().git_merge,
         "git-delete": Git().git_delete_branch,
         "git-clone": Git().git_clone,
-        "git-add": Git().git_add, 
+        "git-add": Git().git_add,
         "git-commit": Git().git_commit,
         
         # Unique Git Features
+        "play": lambda args: Song.play_song(" ".join(args)),
         "git-smart": Git().git_smart_commit,
         "git-help": Git().git_help,
         "git-history": Git().git_history,
