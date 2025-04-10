@@ -89,8 +89,8 @@ class Terminal:
     def terminal_3(self):
         # Extract current working directory
         cwd = os.getcwd().split(os.sep)
-
         hostname = platform.node()
+        
         # Build left segment
         left = Text()
         left.append("\n", style="green")
@@ -150,21 +150,22 @@ class Terminal:
             changes = 0
 
         # Left: folder name segment
-        global prompt
-        prompt = Text()
-        prompt.append("\n", style="black on #FFD700")
-        prompt.append(f" {folder} ", style="black on #FFD700")
-        prompt.append("", style="#FFD700 on dark_orange")
+        p = Text()
+        p.append("\n", style="black on #FFD700")
+        p.append(f" {folder} ", style="black on #FFD700")
+        p.append("", style="#FFD700 on dark_orange")
 
         # Middle: branch and status
-        prompt.append(f"  {branch} = ", style="black on dark_orange")
-        prompt.append(f" {changes} ", style="black on dark_orange")
+        p.append(f"  {branch} = ", style="black on dark_orange")
+        p.append(f" {changes} ", style="black on dark_orange")
 
         # Right: bolt/power symbol
-        prompt.append("", style="dark_orange on blue")
-        prompt.append(f" {time_str} ", style="white on blue")
-        prompt.append("", style="blue on black")
+        p.append("", style="dark_orange on blue")
+        p.append(f" {time_str} ", style="white on blue")
+        p.append("", style="blue on black")
 
+        global prompt
+        prompt = p
         self.set_prompt(prompt)
         return prompt
 
