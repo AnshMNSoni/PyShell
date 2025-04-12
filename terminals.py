@@ -353,16 +353,56 @@ class Terminal:
     
     
     def terminal_8(self):
-        pass
-    
-    
-    def terminal_9(self):
-        pass
-    
-    
-    def terminal_10(self):
-        pass
+        start_time = time.time()
 
+        # Gather information
+        user = os.getenv("USER") or os.getenv("USERNAME") or "user"
+        hostname = socket.gethostname().split('.')[0]
+        folder = os.path.basename(os.getcwd())
+
+        # Git branch info
+        try:
+            branch = subprocess.check_output(
+                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                stderr=subprocess.DEVNULL
+            ).decode().strip()
+        except subprocess.CalledProcessError:
+            branch = ""
+
+        end_time = time.time()
+        exec_time = f"{int((end_time - start_time) * 1000)}ms"
+        current_time = datetime.now().strftime("%d/%m/%y %H:%M")
+
+        # LEFT prompt
+        left = Text()
+        left.append("\n", style="grey37")
+        left.append(" shell ", style="black on grey37")
+        left.append("\uE0B4", style="grey37")
+        left.append("", style="grey85")
+        left.append(f"  {user}@{hostname} ", style="black on grey85")
+        left.append("\uE0B4", style="grey85")
+        if branch:
+            left.append("", style="khaki1")
+            left.append(f"  {branch} ", style="black on khaki1")
+            left.append("\uE0B4", style="khaki1")
+
+        # Add directory
+        full_path = os.getcwd()
+        folders = full_path.split(os.sep)
+        folder_path = " » ".join(folders[-2:])  # Show last 2 folders
+        left.append(f"\n[   {folder_path} ]", style="white")
+
+        # RIGHT prompt
+        right = Text()
+        right.append(f"{exec_time}  -  {current_time}", style="bold palegreen3")
+
+        # Final combined prompt
+        spacing = " " * max(console.width - len(left.plain.splitlines()[-1]) - len(right.plain), 1)
+        
+        global prompt
+        prompt = left + Text(spacing) + right
+        self.set_prompt(prompt)
+        return prompt
 
     def change_terminal(self, *args):
         global prompt_flag
@@ -375,12 +415,10 @@ class Terminal:
         console.print("[3] Agnoster")
         console.print("[4] Marcduiker")
         console.print("[5] Clean Detailed")
-        console.print("[6] ")
+        console.print("[6] Atomic-Lite")
         console.print("[7] PyShell Default")
-        console.print("[8] ")
-        console.print("[9] ")
-        console.print("[10] ")
-        choice = Prompt.ask("Enter layout number", choices=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], default="1")
+        console.print("[8] Softline")
+        choice = Prompt.ask("Enter layout number", choices=["1", "2", "3", "4", "5", "6", "7", "8"], default="1")
     
         current_terminal = int(choice)
         config.current_terminal_layout = current_terminal
@@ -403,8 +441,5 @@ class Terminal:
             self.terminal_7()
         elif current_terminal == 8:
             self.terminal_8()
-        elif current_terminal == 9:
-            self.terminal_9()
-        elif current_terminal == 10:
-            self.terminal_10()
+            
         
