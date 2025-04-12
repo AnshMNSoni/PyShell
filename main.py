@@ -175,10 +175,6 @@ def display_prompt(username):
             Terminal().terminal_7()
         elif config.current_terminal_layout == 8:
             Terminal().terminal_8()
-        elif config.current_terminal_layout == 9:
-            Terminal().terminal_9()
-        elif config.current_terminal_layout == 10:
-            Terminal().terminal_10()
             
         console.print(terminal.get_prompt())  # Use prompt returned from Terminal
        
