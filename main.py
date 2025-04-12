@@ -9,6 +9,7 @@ import string
 import threading
 import time
 import subprocess
+import pyttsx3
 from datetime import datetime
 from rich.console import Console
 from rich.prompt import Prompt
@@ -193,7 +194,13 @@ def main():
     console.print("{Python CLI by @ansh.mn.soni}", style="white")
     console.print(f"System: {platform.system()} {platform.release()} ", style="bold cyan")
     console.print("="*70, style="bold blue")
-
+    
+    # Welcome message
+    engine = pyttsx3.init()
+    engine.say("Welcome to Ansh Soni's Terminal")
+    engine.runAndWait()
+    
+    
     global username
     username, role = register_user() if Prompt.ask("New user?", choices=["y", "n"]) == "y" else login_user()
 
