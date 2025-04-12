@@ -1,6 +1,7 @@
 import os
 import time
 import psutil
+import socket
 import subprocess
 import platform
 from datetime import datetime
@@ -236,8 +237,73 @@ class Terminal:
 
     
     def terminal_6(self):
-        pass
-    
+        start_time = time.time()
+
+        # Current folder name
+        folder = os.path.basename(os.getcwd())
+
+        # Git info
+        try:
+            branch = subprocess.check_output(
+                ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                stderr=subprocess.DEVNULL
+            ).decode().strip()
+        except subprocess.CalledProcessError:
+            branch = "no-branch"
+
+        try:
+            status_output = subprocess.check_output(
+                ["git", "status", "--porcelain"],
+                stderr=subprocess.DEVNULL
+            ).decode().strip()
+            changes = len(status_output.splitlines())
+        except subprocess.CalledProcessError:
+            changes = 0
+
+        end_time = time.time()
+        exec_time = f"{int((end_time - start_time) * 1000)}ms"
+
+        # Memory
+        mem = psutil.virtual_memory()
+        mem_used = mem.used / (1024 ** 3)
+        mem_total = mem.total / (1024 ** 3)
+        mem_percent = mem.percent
+
+        # Host and Time
+        hostname = socket.gethostname().split(".")[0]
+        now = datetime.now().strftime("%a, %H:%M")
+
+        left = Text()
+        left.append("\n", style="black on blue")
+        left.append(" shell ", style="white on blue")
+        left.append("", style="blue on black")
+        left.append("", style="black on dark_orange")
+        left.append("  ", style="black on dark_orange")
+        left.append(f"{folder} ", style="black on dark_orange")
+        left.append("", style="dark_orange on black")
+        left.append("", style="black on yellow")
+        left.append(f" {branch} =  {changes} ", style="black on yellow")
+        left.append("", style="yellow on black")
+        left.append("", style="black on grey70")
+        left.append(f" {exec_time} ", style="black on grey70")
+        left.append("", style="grey70 on black")
+
+        right = Text()
+        right.append("", style="green on black")
+        right.append(f" 󰾆  {mem_percent:.1f}% ", style="green on black")
+        right.append("", style="blue on black")
+        right.append(f" {hostname} ", style="white on blue")
+        right.append("", style="black on blue")
+        right.append("", style="grey70 on black")
+        right.append(f"  {now} ", style="black on grey70")
+
+        spacing = " " * max(console.width - len(left.plain) - len(right.plain), 1)
+        
+        global prompt
+        prompt = left + Text(spacing) + right
+        self.set_prompt(prompt)
+        return prompt
+
     
     def terminal_7(self):
         cwd = os.getcwd().split(os.sep)
