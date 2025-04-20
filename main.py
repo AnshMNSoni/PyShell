@@ -22,12 +22,12 @@ from linux_commands import Commands
 from git_commands import Git
 from terminals import Terminal
 from song import Song
+from equations import Equations
 import config
 
 console = Console()
 USER_FILE = "users.json"
 lock = threading.Lock()
-
 scheduled_jobs = {}
 commands = {} 
 stop_scheduler = False
@@ -200,53 +200,62 @@ def main():
     global username
     username, role = register_user() if Prompt.ask("New user?", choices=["y", "n"]) == "y" else login_user()
 
+    # Objects
+    cmds = Commands()
+    task = Task()
+    weather = Weather()
+    terminl = Terminal()
+    git = Git()
+    eq = Equations()
+    
     commands = {
-        "rename": Commands().rename_item,
-        "move": Commands().move_file,
-        "copy": Commands().copy_file,
+        "rename": cmds.rename_item,
+        "move": cmds.move_file,
+        "copy": cmds.copy_file,
         "processes": list_processes,
         "kill": kill_process,
-        "network": Commands().network_info,
+        "network": cmds.network_info,
         "copytext": clipboard_copy,
         "paste": clipboard_paste,
         "password": generate_password,
-        "calc": Commands().calculator,
-        "math-help": Commands().math_help,
-        "weather": Weather().get_weather,
-        "schedule": Task().schedule_task,  
-        "tasks": Task().list_scheduled_tasks,  
-        "unschedule": Task().remove_scheduled_task,
-        "stop": Task().stop_running_tasks,
+        "calc": cmds.calculator,
+        "equation": eq.solve_equation,
+        "math-help": cmds.math_help,
+        "weather": weather.get_weather,
+        "schedule": task.schedule_task,  
+        "tasks": task.list_scheduled_tasks,  
+        "unschedule": task.remove_scheduled_task,
+        "stop": task.stop_running_tasks,
         "cls": clear,
-        "terminal": Terminal().change_terminal,
+        "terminal": terminl.change_terminal,
         "exit": lambda _: exit(),
         
         # Git Commands (Using Git Class)
-        "git-status": Git().git_status,
-        "git-branches": Git().git_branches,
-        "git-create": Git().git_create_branch,
-        "git-switch": Git().git_switch_branch,
-        "git-push": Git().git_push,
-        "git-pull": Git().git_pull,
-        "git-merge": Git().git_merge,
-        "git-delete": Git().git_delete_branch,
-        "git-clone": Git().git_clone,
-        "git-add": Git().git_add,
-        "git-commit": Git().git_commit,
+        "git-status": git.git_status,
+        "git-branches": git.git_branches,
+        "git-create": git.git_create_branch,
+        "git-switch": git.git_switch_branch,
+        "git-push": git.git_push,
+        "git-pull": git.git_pull,
+        "git-merge": git.git_merge,
+        "git-delete": git.git_delete_branch,
+        "git-clone": git.git_clone,
+        "git-add": git.git_add,
+        "git-commit": git.git_commit,
         
         # Unique Git Features
         "play": lambda args: Song.play_song(" ".join(args)),
-        "git-smart": Git().git_smart_commit,
-        "git-help": Git().git_help,
-        "git-history": Git().git_history,
-        "git-undo": Git().git_undo,
-        "git-stash": Git().git_stash,
-        "git-recover": Git().git_recover,
-        "git-dashboard": Git().git_dashboard,
-        "git-auto_merge": Git().git_auto_merge,
-        "git-voice": Git().git_voice_command,
-        "git-reminder": Git().git_reminder,
-        "git-offline_sync": Git().git_offline_sync
+        "git-smart": git.git_smart_commit,
+        "git-help": git.git_help,
+        "git-history": git.git_history,
+        "git-undo": git.git_undo,
+        "git-stash": git.git_stash,
+        "git-recover": git.git_recover,
+        "git-dashboard": git.git_dashboard,
+        "git-auto_merge": git.git_auto_merge,
+        "git-voice": git.git_voice_command,
+        "git-reminder": git.git_reminder,
+        "git-offline_sync": git.git_offline_sync,
     }
     
     scheduler_thread = threading.Thread(target=Task().run_scheduler, daemon=True)
@@ -268,26 +277,26 @@ def main():
         
         cmd, *args = command
         start_time = time.time()
-        
+
         if cmd in commands:
             commands[cmd](args)
         else:
             if cmd == "ls":
-                Commands().list_files()
+                cmds.list_files()
             elif cmd == "touch" and args:
-                Commands().create_file(args[0])
+                cmds.create_file(args[0])
             elif cmd == "rm" and args:
-                Commands().delete_file(args[0])
+                cmds.delete_file(args[0])
             elif cmd == "mkdir" and args:
-                Commands().create_folder(args[0])
+                cmds.create_folder(args[0])
             elif cmd == "rmdir" and args:
-                Commands().delete_folder(args[0])
+                cmds.delete_folder(args[0])
             elif cmd == "cd" and args:
-                Commands().change_directory(args[0])
+                cmds.change_directory(args[0])
             elif cmd == "edit" and args:
-                Commands().text_editor(args[0])
+                cmds.text_editor(args[0])
             elif cmd == "sysinfo":
-                Commands().system_info()
+                cmds.system_info()
             elif cmd == "exit":
                 console.print("Exiting PyShell...", style="bold red")
                 break
