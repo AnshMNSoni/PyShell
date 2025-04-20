@@ -9,47 +9,62 @@ console = Console()
 class Equations:
     def solve_equation(self, args):
         if not args:
-            console.print("Usage: equation <expression> [= <rhs>] [<variable>]", style="bold red")
+            console.print("Usage: equation <equation1> [; <equation2>; ...]", style="bold red")
             return
+
         try:
-            # Join arguments to form the equation string
-            full_expr = " ".join(args)
+            # Join args and split by semicolon for multiple equations
+            input_str = " ".join(args)
+            raw_equations = [eq.strip() for eq in input_str.split(';') if eq.strip()]
 
-            # Detect variables automatically, default to 'x' if none found
-            variables = sorted(set(re.findall(r'[a-zA-Z]\w*', full_expr)))
-            var = symbols(variables[0]) if variables else symbols('x')
+            # Extract all variable names from input string
+            symbol_names = sorted(set(re.findall(r'[a-zA-Z_]\w*', input_str)))
+            sym_vars_dict = {name: symbols(name) for name in symbol_names}
 
-            # Split into LHS and RHS
-            if '=' in full_expr:
-                lhs, rhs = full_expr.split('=')
-                lhs_expr = sympify(lhs.strip())
-                rhs_expr = sympify(rhs.strip())
-                equation = Eq(lhs_expr, rhs_expr)
+            # Parse equations
+            equations = []
+            for eq_str in raw_equations:
+                if '=' in eq_str:
+                    lhs, rhs = eq_str.split('=')
+                    lhs_expr = sympify(lhs.strip(), locals=sym_vars_dict)
+                    rhs_expr = sympify(rhs.strip(), locals=sym_vars_dict)
+                    equations.append(Eq(lhs_expr, rhs_expr))
+                else:
+                    lhs_expr = sympify(eq_str, locals=sym_vars_dict)
+                    equations.append(Eq(lhs_expr, 0))
+
+            # Infer variables from equations
+            vars_in_equations = list(set().union(*[eq.free_symbols for eq in equations]))
+
+            # Limit number of variables if underdetermined
+            if len(equations) < len(vars_in_equations):
+                vars_to_solve = vars_in_equations[:len(equations)]
             else:
-                lhs_expr = sympify(full_expr)
-                equation = Eq(lhs_expr, 0)
+                vars_to_solve = vars_in_equations
 
-            # Solve the equation
-            solutions = solve(equation, var)
+            # Solve the system of equations
+            solutions = solve(equations, vars_to_solve, dict=True)
 
             # Format output
             if not solutions:
-                console.print(Panel("No solutions found.", style="bold yellow"))
+                console.print(Panel("No solutions found or system is inconsistent.", style="bold yellow"))
             else:
-                pretty_eq = pretty(equation)
-                pretty_solutions = "\n".join(
-                    [f"[bold green]{i+1}.[/bold green] [cyan]{str(sol.evalf())}[/cyan]" for i, sol in enumerate(solutions)]
-                )
-            
+                # Pretty print equations
+                pretty_eqs = "\n".join([pretty(eq) for eq in equations])
+                # Display all variable values
+                pretty_solutions = ""
+                for i, sol in enumerate(solutions, 1):
+                    sol_lines = [f"[bold cyan]{str(k)}[/bold cyan] = [green]{str(v.evalf())}[/green]" for k, v in sol.items()]
+                    pretty_solutions += f"[bold green]{i}.[/bold green]\n" + "\n".join(sol_lines) + "\n\n"
+
                 console.print(Panel.fit(
                     Text.from_markup(
-                        f"[bold cyan]Equation:[/bold cyan]\n{pretty_eq}"
-                        f"\n\n[bold white]Solutions w.r.t [bold cyan]{var}[/bold cyan]:[/bold white]\n{pretty_solutions}"
+                        f"[bold cyan]System of Equations:[/bold cyan]\n{pretty_eqs}"
+                        f"\n\n[bold white]Solutions:[/bold white]\n{pretty_solutions.strip()}"
                     ),
                     title="[bold magenta]Equation Solver[/bold magenta]",
                     border_style="bright_blue"
                 ))
-            
-            
+
         except Exception as e:
             console.print(Panel(f"Error: {e}", style="bold red"))
