@@ -3,6 +3,7 @@
 from rich.console import Console
 from rich.prompt import Prompt
 import os, psutil, shutil, math, threading, socket, requests
+from sympy import symbols, sympify, diff, integrate, pretty
 
 console = Console()
 lock = threading.Lock()
@@ -158,13 +159,28 @@ class Commands:
     
     def calculator(self, args):
         if not args:
-            console.print("Usage: calc <expression>", style="bold red")
+            console.print("Usage:\n- calc <expression>\n- diff <expression> <variable>\n- integrate <expression> <variable>", style="bold red")
             return
         try:
-            expression = " ".join(args)
-            # Use safe evaluation by providing only math functions
-            result = eval(expression, {"__builtins__": None}, math.__dict__)
-            console.print(f"Result: {result}", style="bold green")
+            command = args[0]
+
+            if command == "diff" and len(args) >= 3:
+                expression = " ".join(args[1:-1])
+                var = symbols(args[-1])
+                result = diff(sympify(expression), var)
+                console.print(f"Derivative of [bold yellow]{expression}[/bold yellow] w.r.t [cyan]{var}[/cyan]:\n{pretty(result)}", style="bold green")
+
+
+            elif command == "integrate" and len(args) >= 3:
+                expression = " ".join(args[1:-1])
+                var = symbols(args[-1])
+                result = integrate(sympify(expression), var)
+                console.print(f"Integral of [bold yellow]{expression}[/bold yellow] w.r.t [cyan]{var}[/cyan]:\n{pretty(result)}", style="bold green")
+
+            else:
+                expression = " ".join(args)
+                result = eval(expression, {"__builtins__": None}, math.__dict__)
+                console.print(f"Result: {result}", style="bold green")
+
         except Exception as e:
             console.print(f"Error: {e}", style="bold red")
-            
