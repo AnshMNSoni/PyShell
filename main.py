@@ -289,7 +289,7 @@ def main():
             elif cmd == "sysinfo":
                 Commands().system_info()
             elif cmd == "exit":
-                console.print("Exiting PyOS...", style="bold red")
+                console.print("Exiting PyShell...", style="bold red")
                 break
             else:
                 console.print("Invalid command!", style="bold red")
