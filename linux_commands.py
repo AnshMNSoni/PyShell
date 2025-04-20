@@ -159,7 +159,7 @@ class Commands:
     
     def calculator(self, args):
         if not args:
-            console.print("Usage:\n- calc <expression>\n- diff <expression> <variable>\n- integrate <expression> <variable>", style="bold red")
+            console.print("Usage:\n- calc <expression>\n- calc diff <expression> <variable>\n- calc integrate <expression> <variable>", style="bold red")
             return
         try:
             command = args[0]
