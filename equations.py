@@ -1,4 +1,4 @@
-from sympy import symbols, sympify, Eq, solve, pretty
+from sympy import symbols, sympify, Eq, solve, pretty, Function, dsolve, Derivative, simplify
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
@@ -68,3 +68,7 @@ class Equations:
 
         except Exception as e:
             console.print(Panel(f"Error: {e}", style="bold red"))
+    
+    
+    
+    # Differential equation solver

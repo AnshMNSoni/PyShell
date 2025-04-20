@@ -220,6 +220,7 @@ def main():
         "password": generate_password,
         "calc": cmds.calculator,
         "equation": eq.solve_equation,
+        # "diffequation": eq.solve_differential,
         "math-help": cmds.math_help,
         "weather": weather.get_weather,
         "schedule": task.schedule_task,  
