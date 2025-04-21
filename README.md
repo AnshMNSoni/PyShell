@@ -90,6 +90,6 @@ Thank you for considering contributing! Please follow these steps:
 `GitHub` - [Visit](https://github.com/AnshMNSoni) </br>
 `LinkedIn` - [Visit](https://linkedin.com/in/anshsoni)
 
-## Thankyou 😀
+## Thankyou 😀<br/>
 
-## Phase-1 Under Progress 
+# Phase-1 Under Progress 
