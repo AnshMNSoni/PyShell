@@ -44,7 +44,7 @@ Preview </br></br>
 - `renaming file` in between the program
 
 #### 7️⃣ Simple and Clean Terminal
-Preview </br></br>
+###### Preview </br></br>
 ![image](https://github.com/user-attachments/assets/67769091-4d4a-471a-b2fc-1a31753da9c9)
 
 ## 🧑‍💻 How to use:
@@ -64,7 +64,7 @@ pip install -r requirements.txt
 - Inside `get_weather` function
 - api_key = "YOUR_API_KEY" </br>
 
-Preview</br></br>
+###### Preview</br></br>
 ![image](https://github.com/user-attachments/assets/b6928f38-0319-48ba-aaaf-39d1f7b873e7)
 </br>
 
