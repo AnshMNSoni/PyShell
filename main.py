@@ -1,15 +1,4 @@
-import os
-import time
-import platform
-import psutil
-import json
-import pyperclip
-import random
-import string
-import threading
-import time
-import subprocess
-import pyttsx3
+import os, time, platform, psutil, json, pyperclip, random, string, threading, time, subprocess, pyttsx3, pyfiglet
 from datetime import datetime
 from rich.console import Console
 from rich.prompt import Prompt
@@ -185,21 +174,17 @@ def clear(*args):
 
 def main():
     console.clear()
-    console.print("="*70, style="bold blue")
-    console.print("Welcome to PyShell", style="bold yellow", end=" ")
-    console.print("{Python CLI by @ansh.mn.soni}", style="white")
-    console.print(f"System: {platform.system()} {platform.release()} ", style="bold cyan")
-    console.print("="*70, style="bold blue")
+    ascii_banner = pyfiglet.figlet_format("PyShell")
+    print(ascii_banner)
     
     # Welcome message
     engine = pyttsx3.init()
-    engine.say("Welcome to Ansh Soni's Terminal")
+    engine.say("Every command is a new beginning. Welcome to PyShell.")
     engine.runAndWait()
-    
     
     global username
     username, role = register_user() if Prompt.ask("New user?", choices=["y", "n"]) == "y" else login_user()
-
+    
     # Objects
     cmds = Commands()
     task = Task()
