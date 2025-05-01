@@ -179,7 +179,7 @@ def main():
     
     # Welcome message
     engine = pyttsx3.init()
-    engine.say("Every command is a new beginning. Welcome to PyShell.")
+    engine.say("Remember, every command is a new beginning. Welcome to PyShell.")
     engine.runAndWait()
     
     global username
