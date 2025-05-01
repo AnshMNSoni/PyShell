@@ -168,14 +168,14 @@ class Commands:
                 expression = " ".join(args[1:-1])
                 var = symbols(args[-1])
                 result = diff(sympify(expression), var)
-                console.print(f"Derivative of [bold yellow]{expression}[/bold yellow] w.r.t [cyan]{var}[/cyan]:\n{pretty(result)}", style="bold green")
+                console.print(f"Derivative of [bold yellow]{pretty(expression)}[/bold yellow] w.r.t [cyan]{var}[/cyan]:\n{pretty(result)}", style="bold green")
 
 
             elif command == "integrate" and len(args) >= 3:
                 expression = " ".join(args[1:-1])
                 var = symbols(args[-1])
                 result = integrate(sympify(expression), var)
-                console.print(f"Integral of [bold yellow]{expression}[/bold yellow] w.r.t [cyan]{var}[/cyan]:\n{pretty(result)}", style="bold green")
+                console.print(f"Integral of [bold yellow]{pretty(expression)}[/bold yellow] w.r.t [cyan]{var}[/cyan]:\n{pretty(result)}", style="bold green")
 
             else:
                 expression = " ".join(args)
