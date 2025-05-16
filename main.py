@@ -177,11 +177,6 @@ def main():
     ascii_banner = pyfiglet.figlet_format("PyShell")
     print(ascii_banner)
     
-    # Welcome message
-    engine = pyttsx3.init()
-    engine.say("Remember, every command is a new beginning. Welcome to PyShell.")
-    engine.runAndWait()
-    
     global username
     username, role = register_user() if Prompt.ask("New user?", choices=["y", "n"]) == "y" else login_user()
     
