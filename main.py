@@ -1,4 +1,4 @@
-import os, time, platform, psutil, json, pyperclip, random, string, threading, time, subprocess, pyttsx3, pyfiglet
+import os, time, platform, psutil, json, pyperclip, random, string, threading, time, subprocess, pyfiglet, config
 from datetime import datetime
 from rich.console import Console
 from rich.prompt import Prompt
@@ -12,7 +12,7 @@ from git_commands import Git
 from terminals import Terminal
 from song import Song
 from equations import Equations
-import config
+from game import Game
 
 console = Console()
 USER_FILE = "users.json"
@@ -209,6 +209,7 @@ def main():
         "stop": task.stop_running_tasks,
         "cls": clear,
         "terminal": terminl.change_terminal,
+        "game": lambda args: Game.play_game(" ".join(args)),
         "exit": lambda _: exit(),
         
         # Git Commands (Using Git Class)
