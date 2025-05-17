@@ -13,6 +13,7 @@ from terminals import Terminal
 from song import Song
 from equations import Equations
 from game import Game
+from statistical import StatisticsCalculator
 
 console = Console()
 USER_FILE = "users.json"
@@ -187,6 +188,7 @@ def main():
     terminl = Terminal()
     git = Git()
     eq = Equations()
+    stats = StatisticsCalculator()
     
     commands = {
         "rename": cmds.rename_item,
@@ -199,6 +201,7 @@ def main():
         "paste": clipboard_paste,
         "password": generate_password,
         "calc": cmds.calculator,
+        "stats": lambda args: stats.calculate_statistics(),
         "equation": eq.solve_equation,
         # "diffequation": eq.solve_differential,
         "math-help": cmds.math_help,
