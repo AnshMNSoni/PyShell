@@ -15,6 +15,7 @@ from equations import Equations
 from game import Game
 from statistical import StatisticsCalculator
 from pybot import PyBotChat
+from graphs import GraphPlotter
 
 console = Console()
 USER_FILE = "users.json"
@@ -190,6 +191,7 @@ def main():
     git = Git()
     eq = Equations()
     stats = StatisticsCalculator()
+    graph = GraphPlotter()
     
     commands = {
         "rename": cmds.rename_item,
@@ -215,6 +217,7 @@ def main():
         "terminal": terminl.change_terminal,
         "game": lambda args: Game.play_game(" ".join(args)),
         "pybot": lambda args: PyBotChat().chat_loop(),
+        "plot": lambda args: graph.display_menu(),
         "exit": lambda _: exit(),
         
         # Git Commands (Using Git Class)
