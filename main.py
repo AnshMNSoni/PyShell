@@ -14,6 +14,7 @@ from song import Song
 from equations import Equations
 from game import Game
 from statistical import StatisticsCalculator
+from pybot import PyBotChat
 
 console = Console()
 USER_FILE = "users.json"
@@ -213,6 +214,7 @@ def main():
         "cls": clear,
         "terminal": terminl.change_terminal,
         "game": lambda args: Game.play_game(" ".join(args)),
+        "pybot": lambda args: PyBotChat().chat_loop(),
         "exit": lambda _: exit(),
         
         # Git Commands (Using Git Class)
