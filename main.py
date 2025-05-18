@@ -217,7 +217,7 @@ def main():
         "terminal": terminl.change_terminal,
         "game": lambda args: Game.play_game(" ".join(args)),
         "pybot": lambda args: PyBotChat().chat_loop(),
-        "plot": lambda args: graph.display_menu(),
+        "plot": lambda args: graph.run(),
         "exit": lambda _: exit(),
         
         # Git Commands (Using Git Class)
