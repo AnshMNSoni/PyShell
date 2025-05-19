@@ -45,7 +45,18 @@ PyShell is a custom-built command-line interface (CLI) that serves as a lightwei
 
 #### 7️⃣ Simple and Clean Terminal
 ###### Preview </br></br>
-![image](https://github.com/user-attachments/assets/67769091-4d4a-471a-b2fc-1a31753da9c9)
+![Screenshot 2025-05-18 125323](https://github.com/user-attachments/assets/55692d28-4f35-4236-b9ac-c976e85d5891)
+
+#### 8️⃣ Play Song right through terminal
+###### Preview </br></br>
+![Screenshot 2025-05-18 132600](https://github.com/user-attachments/assets/d254ab8b-da7f-4d78-b5c3-45233a9ffd96)
+![Screenshot 2025-05-18 132534](https://github.com/user-attachments/assets/f1c38833-bed4-47ab-8b20-ce046474c1e0)
+
+#### 9️⃣ Change terminal Functionality
+###### Preview </br></br>
+![Screenshot 2025-05-18 125323](https://github.com/user-attachments/assets/34b8b52f-e0ea-4e40-b462-275f1c490906)
+
+
 
 ## 🧑‍💻 How to use:
 1️⃣ Clone the Repository:</br>
