@@ -118,7 +118,7 @@ Thank you for considering contributing! Please follow these steps:
 
 ### 🔗 Connect with Me:
 `GitHub` - [Visit](https://github.com/AnshMNSoni) </br>
-`LinkedIn` - [Visit](https://linkedin.com/in/anshsoni)
+`LinkedIn` - [Visit](https://linkedin.com/in/anshsoni) </br>
 `Follow Us` - [Visit](https://linkedin.com/company/py-shell)
 
 ## Thankyou 😀<br/>
