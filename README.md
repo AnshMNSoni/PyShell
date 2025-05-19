@@ -100,7 +100,7 @@ pip install -r requirements.txt
 
 5️⃣ Lastly, Open you terminal and run:</br>
 ```sh
-python cli.py
+python main.py
 ```
 
 ## 🔎 Future Work:
