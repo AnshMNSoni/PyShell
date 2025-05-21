@@ -206,7 +206,7 @@ def main():
         "calc": cmds.calculator,
         "stats": lambda args: stats.calculate_statistics(),
         "equation": eq.solve_equation,
-        # "diffequation": eq.solve_differential,
+        "differential": lambda args: eq.solve_differential(args),
         "math-help": cmds.math_help,
         "weather": weather.get_weather,
         "schedule": task.schedule_task,  
