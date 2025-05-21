@@ -1,8 +1,6 @@
 # PyShell - Python Based CLI 
 ### (developed by @ansh.mn.soni)
 
-## Phase-1 Launched
-
 ## 👉 Introduction:
 PyShell is a custom-built command-line interface (CLI) that serves as a lightweight yet powerful terminal, developed using Python. It allows users to interact with their system, manage files, process system commands, and perform various utility functions. With a focus on simplicity, speed, and usability, PyShell enhances the standard terminal experience by integrating automation, process management, and network utilities.
 
@@ -122,5 +120,3 @@ Thank you for considering contributing! Please follow these steps:
 `Follow Us` - [Visit](https://linkedin.com/company/py-shell)
 
 ## Thankyou 😀<br/>
-
-# Phase-2 Under Progress 
