@@ -1,8 +1,11 @@
-from sympy import symbols, sympify, Eq, solve, pretty, Function, dsolve, Derivative, simplify
+from sympy import symbols, sympify, Eq, solve, pretty, Function, dsolve, Derivative, simplify, pretty_print
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
+from rich.prompt import Prompt
+from sympy.parsing.sympy_parser import parse_expr
 import re
+from sympy.abc import x
 
 console = Console()
 
@@ -70,5 +73,50 @@ class Equations:
             console.print(Panel(f"Error: {e}", style="bold red"))
     
     
-    
     # Differential equation solver
+    def solve_differential(self, args):
+        console = Console()
+
+        console.print(Panel.fit(
+            "[bold cyan]🧠 Solve n-th Order Differential Equations[/bold cyan]",
+            subtitle="[magenta]PyShell[/magenta]",
+            border_style="green"
+        ))
+
+        console.print(Panel(
+            "[bold yellow]Input Format:[/bold yellow]\n"
+            "- Use [bold]y(x)[/bold] as the dependent variable\n"
+            "- Use [bold]Derivative(y(x), x)[/bold] for dy/dx\n"
+            "- Higher orders: [bold]Derivative(y(x), x, x)[/bold], etc.\n"
+            "- Separate LHS and RHS with '='\n\n"
+            "🔹 Example: [italic]Derivative(y(x), x, x) + 2*Derivative(y(x), x) = exp(2*x)*tan(x)[/italic]",
+            title="📝 How to Enter", border_style="blue"
+        ))
+
+        user_input = Prompt.ask("[green]📥 Enter your differential equation")
+
+        y = Function('y')
+
+        try:
+            lhs_str, rhs_str = user_input.split('=')
+            lhs = parse_expr(lhs_str.strip(), evaluate=False)
+            rhs = parse_expr(rhs_str.strip(), evaluate=False)
+
+            equation = Eq(lhs, rhs)
+            solution = dsolve(equation, y(x))
+
+            console.print(Panel.fit("[bold green]✅ Solved Successfully![/bold green]", border_style="green"))
+
+            console.print(Panel(
+                "[bold white]🖨 Solution:[/bold white]",
+                border_style="cyan"
+            ))
+
+            pretty_print(solution)
+
+        except Exception as e:
+            console.print(Panel(
+                f"[red]❌ Error:[/red] {str(e)}\n"
+                "Please ensure your equation is in the correct format.",
+                title="⚠️ Invalid Input", border_style="red"
+            ))
