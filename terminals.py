@@ -9,6 +9,7 @@ from rich.text import Text
 from rich.console import Console
 from rich.prompt import Prompt
 import config
+import questionary
 
 console = Console()
 prompt = None
@@ -407,39 +408,35 @@ class Terminal:
     def change_terminal(self, *args):
         global prompt_flag
         prompt_flag = False
-        
+
         self.set_prompt_flag(False)  # Update the flag globally
-        console.print("\nChoose Terminal Layout:", style="bold blue")
-        console.print("[1] Solarized Night")
-        console.print("[2] Hacker Green")
-        console.print("[3] Agnoster")
-        console.print("[4] Marcduiker")
-        console.print("[5] Clean Detailed")
-        console.print("[6] Atomic-Lite")
-        console.print("[7] PyShell Default")
-        console.print("[8] Softline")
-        choice = Prompt.ask("Enter layout number", choices=["1", "2", "3", "4", "5", "6", "7", "8"], default="1")
-    
-        current_terminal = int(choice)
+
+        choices = [
+            "1 - Solarized Night",
+            "2 - Hacker Green",
+            "3 - Agnoster",
+            "4 - Marcduiker",
+            "5 - Clean Detailed",
+            "6 - Atomic-Lite",
+            "7 - PyShell Default",
+            "8 - Softline"
+        ]
+
+        choice = questionary.select(
+            "Choose Terminal Layout:",
+            choices=choices
+        ).ask()
+
+        if not choice:
+            console.print("No choice made. Keeping current layout.", style="yellow")
+            return
+
+        current_terminal = int(choice.split(" - ")[0])
         config.current_terminal_layout = current_terminal
+
         console.clear()
-        console.print(f"Terminal switched to layout {choice}!", style="bold green")
-    
-        if current_terminal == 1:
-            self.terminal_1()
-        elif current_terminal == 2:
-            self.terminal_2()
-        elif current_terminal == 3:
-            self.terminal_3()
-        elif current_terminal == 4:
-            self.terminal_4()
-        elif current_terminal == 5:
-            self.terminal_5()
-        elif current_terminal == 6:
-            self.terminal_6()
-        elif current_terminal == 7:
-            self.terminal_7()
-        elif current_terminal == 8:
-            self.terminal_8()
-            
+        console.print(f"Terminal switched to layout {current_terminal}!", style="bold green")
+
+        getattr(self, f"terminal_{current_terminal}")()
+
         
