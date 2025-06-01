@@ -76,12 +76,15 @@ class GraphPlotter:
         self.console.print("[blue]1.[/blue] Explicit: y = f(x)")
         self.console.print("[blue]2.[/blue] Implicit: f(x, y) = 0")
 
-        choice = Prompt.ask("[bold green]Enter choice (1 or 2)[/bold green]")
+        try:
+            choice = Prompt.ask("[bold green]Enter choice (1 or 2)[/bold green]")
         
-        if choice == "1":
-            self.plot_explicit()
-        elif choice == "2":
-            self.plot_implicit()
-        else:
-            self.console.print("[bold red]Invalid choice. Please enter 1 or 2.[/bold red]")
-
+            if choice == "1":
+                self.plot_explicit()
+            elif choice == "2":
+                self.plot_implicit()
+            else:
+                self.console.print("[bold red]Invalid choice. Please enter 1 or 2.[/bold red]")
+                
+        except KeyboardInterrupt:
+            pass
