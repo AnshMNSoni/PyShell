@@ -73,6 +73,9 @@ PyShell is a custom-built command-line interface (CLI) that serves as a lightwei
 
 ![Screenshot 2025-05-18 131424](https://github.com/user-attachments/assets/a34d24c1-1a6b-4be2-88b8-1d1abd43f801)
 
+#### 11: PyBot - your terminal chatbot
+![image](https://github.com/user-attachments/assets/fe7ef3ad-d88f-470d-96f3-bce87bdc327a)
+
 #### and many more...
 
 ## 🧑‍💻 How to use:
