@@ -47,7 +47,7 @@ class GraphPlotter:
             self.console.print(f"[red]Error: {e}[/red]")
 
     def plot_implicit(self):
-        equation = Prompt.ask("[bold blue]Enter f(x, y) = 0[/bold blue] (e.g., x**2 + y**2 - 1)")
+        equation = Prompt.ask("[bold blue]Enter f(x, y) = 0[/bold blue] (e.g., x**2 + y**2 - 1, mod(x, 2) - y)")
         x_min = FloatPrompt.ask("[green]Enter minimum x-value[/green]")
         x_max = FloatPrompt.ask("[green]Enter maximum x-value[/green]")
         y_min = FloatPrompt.ask("[green]Enter minimum y-value[/green]")
@@ -87,4 +87,4 @@ class GraphPlotter:
                 self.console.print("[bold red]Invalid choice. Please enter 1 or 2.[/bold red]")
                 
         except KeyboardInterrupt:
-            pass
+            print("\n")
