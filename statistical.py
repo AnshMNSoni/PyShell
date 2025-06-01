@@ -1,18 +1,34 @@
-from InquirerPy import inquirer
-import statistics, time
-import scipy.stats as stats
+from rich.console import Console
+from rich.table import Table
+from rich.panel import Panel
+from rich.prompt import Prompt
+from rich.text import Text
+import statistics
 import numpy as np
+from scipy import stats
+from InquirerPy import inquirer
+
+console = Console()
 
 class StatisticsCalculator:
     def get_dataset(self, prompt):
         while True:
             try:
-                data = list(map(float, input(f"{prompt} (comma-separated): ").split(',')))
+                user_input = Prompt.ask(f"[bold cyan]{prompt}[/] (comma-separated)")
+                data = list(map(float, user_input.split(',')))
                 if not data:
                     raise ValueError
                 return data
             except ValueError:
-                print("❌ Invalid input. Please enter comma-separated numbers.")
+                console.print("❌ [red]Invalid input. Please enter comma-separated numbers.[/red]\n")
+
+    def display_result(self, title, result):
+        panel = Panel.fit(
+            Text(f"{result}", style="bold green"),
+            title=f"[bold magenta]{title}[/bold magenta]",
+            border_style="bright_blue"
+        )
+        console.print(panel)
 
     def calculate_statistics(self):
         while True:
@@ -28,9 +44,10 @@ class StatisticsCalculator:
             ).execute()
 
             if choice == "❌ Exit":
+                console.print("[bold red]Exiting the Statistics Calculator. Goodbye![/bold red]")
                 break
 
-            # For single-dataset stats
+            # Single-dataset measures
             if choice in ["Mean", "Median", "Mode", "Standard Deviation", "Variance"]:
                 data = self.get_dataset("Enter numbers for Dataset 1")
                 try:
@@ -44,11 +61,12 @@ class StatisticsCalculator:
                         result = statistics.stdev(data)
                     elif choice == "Variance":
                         result = statistics.variance(data)
-                    print(f"✅ {choice}: {result}")
-                except Exception as e:
-                    print(f"❌ Error calculating {choice}: {e}")
 
-            # For two-dataset stats
+                    self.display_result(choice, result)
+                except Exception as e:
+                    console.print(f"❌ [red]Error calculating {choice}: {e}[/red]")
+
+            # Two-dataset measures
             elif choice in ["Covariance & Correlation", "Spearman Rank Correlation", "Regression Analysis"]:
                 data1 = self.get_dataset("Enter numbers for Dataset 1")
                 data2 = self.get_dataset("Enter numbers for Dataset 2")
@@ -59,18 +77,29 @@ class StatisticsCalculator:
                     if choice == "Covariance & Correlation":
                         cov = np.cov(data1, data2)[0][1]
                         corr = np.corrcoef(data1, data2)[0][1]
-                        print(f"✅ Covariance: {cov}")
-                        print(f"✅ Pearson Correlation: {corr}")
+
+                        table = Table(title="Covariance & Pearson Correlation", style="cyan")
+                        table.add_column("Measure", style="bold yellow")
+                        table.add_column("Value", style="bold green")
+                        table.add_row("Covariance", f"{cov:.4f}")
+                        table.add_row("Pearson Correlation", f"{corr:.4f}")
+                        console.print(table)
 
                     elif choice == "Spearman Rank Correlation":
                         spearman_corr, _ = stats.spearmanr(data1, data2)
-                        print(f"✅ Spearman Rank Correlation: {spearman_corr}")
+                        self.display_result("Spearman Rank Correlation", f"{spearman_corr:.4f}")
 
                     elif choice == "Regression Analysis":
                         slope, intercept, r_value, p_value, std_err = stats.linregress(data1, data2)
-                        print(f"✅ Regression Line: Y = {slope:.2f}X + {intercept:.2f}")
-                        print(f"   R-squared: {r_value**2:.4f}")
-                        print(f"   P-value: {p_value:.4f}")
-                        print(f"   Std. Error: {std_err:.4f}")
+
+                        table = Table(title="Linear Regression Analysis", style="cyan")
+                        table.add_column("Metric", style="bold yellow")
+                        table.add_column("Value", style="bold green")
+                        table.add_row("Regression Line", f"Y = {slope:.2f}X + {intercept:.2f}")
+                        table.add_row("R-squared", f"{r_value**2:.4f}")
+                        table.add_row("P-value", f"{p_value:.4f}")
+                        table.add_row("Std. Error", f"{std_err:.4f}")
+                        console.print(table)
+
                 except Exception as e:
-                    print(f"❌ Error: {e}")
+                    console.print(f"❌ [red]Error: {e}[/red]\n")
