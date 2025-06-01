@@ -107,68 +107,24 @@ def generate_password(*args):
 terminal = Terminal()
 
 def display_prompt(username):
-    if terminal.get_prompt_flag(): 
-        hostname = platform.node()
-        cwd = os.getcwd().split(os.sep)
-        time_str = datetime.now().strftime("%H:%M")
-
-        mem = psutil.virtual_memory()
-        mem_percent = mem.percent
-        mem_total_gb = round(mem.total / (1024 ** 3))
-        mem_used_gb = round(mem.used / (1024 ** 3))
-
-        left_prompt = Text()
-        left_prompt.append("\n # ", style="black on white")
-        left_prompt.append(" shell ", style="white on blue")
-        left_prompt.append("", style="blue on black")
-        left_prompt.append("", style="black on blue")
-        left_prompt.append(f" MEM: {mem_percent}% ↑ {mem_used_gb}/{mem_total_gb}GB ", style="white on blue")
-        left_prompt.append("", style="blue on grey15")
-        left_prompt.append(" code ", style="white on grey15")
-        left_prompt.append("", style="grey15 on black")
-        left_prompt.append(f" {time_str} ", style="white on black")
-        left_prompt.append("", style="black")
-
-        for part in cwd:
-            if part:
-                left_prompt.append(" // ", style="white")
-                left_prompt.append("📁", style="white")
-                left_prompt.append(f" {part} ", style="white")
-
-        right_prompt = Text()
-        right_prompt.append("", style="black on medium_sea_green")
-        right_prompt.append("   ", style="black on medium_sea_green")
-
-        try:
-            branch = subprocess.check_output(
-                ["git", "rev-parse", "--abbrev-ref", "HEAD"],
-                stderr=subprocess.DEVNULL
-            ).decode("utf-8").strip()
-        except subprocess.CalledProcessError:
-            branch = "no-branch"
-
-        right_prompt.append(f" {branch} ≡ ⎔ ~1 ", style="black on medium_sea_green")
-
-        console.print(left_prompt + Text(" " * (console.width - len(left_prompt.plain) - len(right_prompt.plain))) + right_prompt)
-    else:
-        if config.current_terminal_layout == 1:  
-            Terminal().terminal_1()
-        elif config.current_terminal_layout == 2:
-            Terminal().terminal_2()
-        elif config.current_terminal_layout == 3:
-            Terminal().terminal_3()
-        elif config.current_terminal_layout == 4:
-            Terminal().terminal_4()
-        elif config.current_terminal_layout == 5:
-            Terminal().terminal_5()
-        elif config.current_terminal_layout == 6:
-            Terminal().terminal_6()
-        elif config.current_terminal_layout == 7:
-            Terminal().terminal_7()
-        elif config.current_terminal_layout == 8:
-            Terminal().terminal_8()
-            
-        console.print(terminal.get_prompt())  # Use prompt returned from Terminal
+    if config.current_terminal_layout == 1:  
+        Terminal().terminal_1()
+    elif config.current_terminal_layout == 2:
+        Terminal().terminal_2()
+    elif config.current_terminal_layout == 3:
+        Terminal().terminal_3()
+    elif config.current_terminal_layout == 4:
+        Terminal().terminal_4()
+    elif config.current_terminal_layout == 5:
+        Terminal().terminal_5()
+    elif config.current_terminal_layout == 6:
+        Terminal().terminal_6()
+    elif config.current_terminal_layout == 7:
+        Terminal().terminal_7()
+    elif config.current_terminal_layout == 8:
+        Terminal().terminal_8()
+        
+    console.print(terminal.get_prompt())
        
     
 # clear console 

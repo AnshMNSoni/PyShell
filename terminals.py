@@ -432,6 +432,8 @@ class Terminal:
             return
 
         current_terminal = int(choice.split(" - ")[0])
+        with open("config.py", "w") as f:
+            f.write(f"current_terminal_layout = {current_terminal}\n")
         config.current_terminal_layout = current_terminal
 
         console.clear()
