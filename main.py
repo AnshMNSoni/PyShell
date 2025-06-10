@@ -1,8 +1,6 @@
-import os, time, platform, psutil, json, pyperclip, random, string, threading, time, subprocess, pyfiglet, config
-from datetime import datetime
+import os, time, psutil, json, pyperclip, random, string, threading, time, pyfiglet, config
 from rich.console import Console
 from rich.prompt import Prompt
-from rich.text import Text
 
 # dependencies
 from weather import Weather
