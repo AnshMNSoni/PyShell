@@ -1,5 +1,4 @@
 from turtle import Turtle
-import os
 
 FONT = ('Courier', 42, 'normal')
 SMALL_FONT = ('Courier', 24, 'normal')

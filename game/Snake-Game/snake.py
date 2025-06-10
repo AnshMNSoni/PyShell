@@ -1,5 +1,5 @@
 from turtle import Turtle
-import time
+
 COR = [(0, 0), (-20, 0), (-40, 0)]
 DISTANCE = 20
 

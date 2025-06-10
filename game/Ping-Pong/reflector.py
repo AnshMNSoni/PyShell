@@ -1,5 +1,4 @@
 from turtle import Turtle, Screen
-import random
 
 LEFT_POSITION = [(-450, 60), (-450, 40), (-450, 20), (-450, 0)]
 RIGHT_POSITION = [(450, 60), (450, 40), (450, 20), (450, 0)]

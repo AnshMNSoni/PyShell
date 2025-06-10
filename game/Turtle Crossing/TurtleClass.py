@@ -1,4 +1,4 @@
-from turtle import Turtle, Screen
+from turtle import Turtle
 
 ALIGNMENT = 'Center'
 FONT = ('Courier', 22, 'normal')

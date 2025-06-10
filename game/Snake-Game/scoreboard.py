@@ -1,4 +1,5 @@
 from turtle import Turtle, Screen
+
 screen = Screen()
 ALIGNMENT = 'Center'
 FONT = ('Courier', 22, 'normal')

@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk, messagebox, font
 import pyttsx3
 import random
-import os
 import pygame
 from questions import get_questions
 

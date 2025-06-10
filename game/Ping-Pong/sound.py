@@ -1,6 +1,5 @@
 import os
 import sys
-import time
 
 # Simple sound implementation that works cross-platform
 class Sound:
