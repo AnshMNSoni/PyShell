@@ -3,7 +3,6 @@ import threading
 import speech_recognition as sr
 from rich.console import Console
 from flask import Flask, render_template_string
-import threading
 import time, webbrowser
 
 console = Console()
