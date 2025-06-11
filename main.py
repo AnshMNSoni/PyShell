@@ -12,7 +12,6 @@ from song import Song
 from equations import Equations
 from game import Game
 from statistical import StatisticsCalculator
-from pybot import PyBotChat
 from graphs import GraphPlotter
 
 console = Console()
@@ -170,7 +169,6 @@ def main():
         "cls": clear,
         "terminal": terminl.change_terminal,
         "game": lambda args: Game.play_game(" ".join(args)),
-        "pybot": lambda args: PyBotChat().chat_loop(),
         "plot": lambda args: graph.run(),
         "exit": lambda _: exit(),
         
