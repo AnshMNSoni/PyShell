@@ -1,1 +1,1 @@
-# PyBot - Python Based Custom ChatBot
+# PyBot - Terminal Based Custom ChatBot
