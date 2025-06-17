@@ -1,6 +1,9 @@
 import os, time, psutil, json, pyperclip, random, string, threading, time, pyfiglet, config
 from rich.console import Console
 from rich.prompt import Prompt
+import spacy
+import subprocess
+import difflib
 
 # dependencies
 from weather import Weather
@@ -13,6 +16,7 @@ from equations import Equations
 from game import Game
 from statistical import StatisticsCalculator
 from graphs import GraphPlotter
+from chatbot import simple_chatbot
 
 console = Console()
 USER_FILE = "users.json"
@@ -198,6 +202,7 @@ def main():
         "git-voice": git.git_voice_command,
         "git-reminder": git.git_reminder,
         "git-offline_sync": git.git_offline_sync,
+        "chatbot": lambda args: simple_chatbot(),
     }
     
     scheduler_thread = threading.Thread(target=Task().run_scheduler, daemon=True)
@@ -211,14 +216,45 @@ def main():
             continue
         
         cmd, *args = command
-        
         start_time = time.time()
-        
-        if not command:
+
+        # --- Advanced NLP to Shell Command Section ---
+        if cmd == "nlp":
+            user_nlp_input = input("Enter your natural language command: ")
+            # More advanced mapping with fuzzy matching
+            nlp_shell_map = {
+                "list files": "ls",
+                "show current directory": "pwd",
+                "make directory": "mkdir {folder}",
+                "remove file": "rm {file}",
+                "show processes": "ps aux",
+                "disk usage": "df -h",
+                "show hidden files": "ls -a",
+                "show file content": "cat {file}",
+                # Add more as needed
+            }
+            # Fuzzy match user input to known intents
+            best_match = difflib.get_close_matches(user_nlp_input.lower(), nlp_shell_map.keys(), n=1, cutoff=0.5)
+            if best_match:
+                intent = best_match[0]
+                shell_cmd = nlp_shell_map[intent]
+                # Ask for required arguments if needed
+                if "{folder}" in shell_cmd:
+                    folder = input("Enter folder name: ")
+                    shell_cmd = shell_cmd.format(folder=folder)
+                elif "{file}" in shell_cmd:
+                    file = input("Enter file name: ")
+                    shell_cmd = shell_cmd.format(file=file)
+                # Confirm with user
+                confirm = input(f"Run shell command: '{shell_cmd}'? (y/n): ")
+                if confirm.lower() == 'y':
+                    subprocess.run(shell_cmd, shell=True)
+                else:
+                    console.print("Command cancelled.", style="bold yellow")
+            else:
+                console.print("Sorry, I didn't understand that command.", style="bold red")
             continue
-        
-        cmd, *args = command
-        start_time = time.time()
+        # --- End Advanced NLP Section ---
 
         if cmd in commands:
             commands[cmd](args)

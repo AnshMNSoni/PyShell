@@ -2,5 +2,9 @@
     "ansh": {
         "password": "123",
         "role": "admin"
+    },
+    "kunj": {
+        "password": "123456789",
+        "role": "user"
     }
 }

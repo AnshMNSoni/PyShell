@@ -73,6 +73,18 @@ PyShell is a custom-built command-line interface (CLI) that serves as a lightwei
 
 ![Screenshot 2025-05-18 131424](https://github.com/user-attachments/assets/a34d24c1-1a6b-4be2-88b8-1d1abd43f801)
 
+#### 1️⃣1️⃣ Terminal-based Chatbot
+- Type `chatbot` in the PyShell terminal to launch an interactive chatbot assistant.
+- The chatbot supports:
+  - Greetings and farewells
+  - Telling the current time
+  - Responding to "what is your name?"
+  - Help command for usage examples
+  - Friendly fallback for unknown queries
+
+###### Preview </br></br>
+![image](https://github.com/user-attachments/assets/your-chatbot-preview-image)
+
 #### and many more...
 
 ## 🧑‍💻 How to use:
@@ -119,4 +131,4 @@ Thank you for considering contributing! Please follow these steps:
 `LinkedIn` - [Visit](https://linkedin.com/in/anshsoni) </br>
 `Follow Us` - [Visit](https://linkedin.com/company/py-shell)
 
-## Thankyou 😀<br/>
+## Thankyou 😀
