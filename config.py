@@ -1,1 +1,1 @@
-current_terminal_layout = 8
+current_terminal_layout = 2

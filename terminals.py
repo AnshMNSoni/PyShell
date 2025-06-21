@@ -10,6 +10,17 @@ from rich.console import Console
 from rich.prompt import Prompt
 import config
 import questionary
+import itertools
+from rich.color import Color
+from rich.segment import Segment
+from rich.style import Style
+import threading
+from rich.panel import Panel
+from rich.table import Table
+import msvcrt
+from rich.live import Live
+from menu_base import MojiSwitchMenu
+from features import smart_suggestions, nl_to_code, error_explainer, snippet_search, code_refactor
 
 console = Console()
 prompt = None
@@ -32,6 +43,118 @@ class Terminal:
         global prompt_flag
         return prompt_flag
 
+    def show_terminal_themes(self):
+        # Define options for terminal themes
+        options = [
+            ("🌙 Solarized Night", "solarized"),
+            ("💻 Hacker Green", "hacker"),
+            ("🧩 Agnoster", "agnoster"),
+            ("🟡 Marcduiker", "marcduiker"),
+            ("🧼 Clean Detailed", "clean"),
+            ("⚛️ Atomic-Lite", "atomic"),
+            ("🐍 PyShell Default", "default"),
+            ("🟦 Softline", "softline")
+        ]
+        
+        def on_execute(state):
+            # Find the selected theme
+            selected = [i for i, (_, value) in enumerate(options, 1) if state[value]]
+            if not selected:
+                console.print("[bold red]No theme selected![/bold red]")
+                return
+            theme_index = selected[0]
+            config.current_terminal_layout = theme_index
+            # Call the corresponding terminal_X method
+            getattr(self, f"terminal_{theme_index}")()
+            console.clear()
+            console.print(f"[bold green]Theme applied: {options[theme_index-1][0]}[/bold green]")
+        
+        # Create and run menu
+        menu = MojiSwitchMenu(
+            title="🎨 Terminal Themes",
+            options=options,
+            on_execute=on_execute
+        )
+
+        # --- SINGLE SELECTION LOGIC ---
+        orig_handle_input = menu.handle_input
+        def single_select_handle_input(choice):
+            # Only one can be True at a time
+            if choice in menu.key_map:
+                for k in menu.state:
+                    menu.state[k] = False
+                menu.state[menu.key_map[choice]] = True
+                return True
+            return orig_handle_input(choice)
+        menu.handle_input = single_select_handle_input
+        menu.run()
+        
+    def display_terminal_table(self, themes):
+        """Display terminal themes in a modern table format"""
+        table = Table(
+            show_header=True,
+            header_style="bold cyan",
+            box=None,
+            padding=(0, 1)
+        )
+        
+        # Add columns
+        table.add_column("No.", style="dim", width=4)
+        table.add_column("Theme", style="bold")
+        table.add_column("Description", style="italic")
+        table.add_column("Status", justify="center", width=4)
+        
+        # Add rows with theme types
+        features = [
+            ("1", "Solarized Night", "Dark theme with solarized colors", "solarized"),
+            ("2", "Hacker Green", "Classic terminal green on black", "hacker"),
+            ("3", "Agnoster", "Powerline-inspired theme", "agnoster"),
+            ("4", "Marcduiker", "Clean and minimal design", "marcduiker"),
+            ("5", "Clean Detailed", "Detailed information display", "clean"),
+            ("6", "Atomic-Lite", "Lightweight atomic design", "atomic"),
+            ("7", "PyShell Default", "Default PyShell theme", "default"),
+            ("8", "Softline", "Soft colors with line separators", "softline")
+        ]
+        
+        for no, name, desc, key in features:
+            status = "✅" if themes.get(key, False) else "❌"
+            table.add_row(no, name, desc, status)
+            
+        # Create panel with table
+        panel = Panel(
+            table,
+            title="🎨 Terminal Themes",
+            border_style="cyan",
+            padding=(1, 2)
+        )
+        
+        console.print(panel)
+
+    def animate_theme_change(self):
+        """Animate theme change with a progress bar effect"""
+        console.print("\n")
+        for i in range(10):
+            progress = "█" * i + "░" * (10 - i)
+            console.print(f"\033[A\033[K[bold blue]Changing theme: [{progress}] {i*10}%[/bold blue]")
+            time.sleep(0.2)
+        console.print("\n")
+
+    def animate_theme_display(self, themes):
+        """Animate theme display with a fade-in effect"""
+        console.print("\n")
+        for i in range(3):
+            console.print("\033[A\033[K", end="")
+            if i == 0:
+                for key, value in themes.items():
+                    console.print(f"[grey50]{key}: {value}[/grey50]")
+            elif i == 1:
+                for key, value in themes.items():
+                    console.print(f"[bold blue]{key}: {value}[/bold blue]")
+            else:
+                for key, value in themes.items():
+                    console.print(f"[bold green]{key}: {value}[/bold green]")
+            time.sleep(0.2)
+        console.print("\n")
 
     def terminal_1(self):
         cwd = os.getcwd().split(os.sep)
@@ -359,7 +482,7 @@ class Terminal:
         # Gather information
         user = os.getenv("USER") or os.getenv("USERNAME") or "user"
         hostname = socket.gethostname().split('.')[0]
-        folder = os.path.basename(os.getcwd())
+        folder = os.getcwd().split(os.sep)[-1]
 
         # Git branch info
         try:
@@ -411,34 +534,13 @@ class Terminal:
 
         self.set_prompt_flag(False)  # Update the flag globally
 
-        choices = [
-            "1 - Solarized Night",
-            "2 - Hacker Green",
-            "3 - Agnoster",
-            "4 - Marcduiker",
-            "5 - Clean Detailed",
-            "6 - Atomic-Lite",
-            "7 - PyShell Default",
-            "8 - Softline"
-        ]
-
-        choice = questionary.select(
-            "Choose Terminal Layout:",
-            choices=choices
-        ).ask()
-
-        if not choice:
-            console.print("No choice made. Keeping current layout.", style="yellow")
-            return
-
-        current_terminal = int(choice.split(" - ")[0])
-        with open("config.py", "w") as f:
-            f.write(f"current_terminal_layout = {current_terminal}\n")
-        config.current_terminal_layout = current_terminal
-
+        # Use the new MojiSwitchMenu-based theme selector
+        self.show_terminal_themes()
+        # After theme selection, update config if needed
+        # (You may want to add logic here to update config.current_terminal_layout)
         console.clear()
-        console.print(f"Terminal switched to layout {current_terminal}!", style="bold green")
-
-        getattr(self, f"terminal_{current_terminal}")()
+        console.print(f"Terminal theme selection complete!", style="bold green")
+        # Optionally, update the prompt to reflect the new theme
+        # self.terminal_1() or similar, based on user selection
 
         
