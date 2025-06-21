@@ -119,4 +119,7 @@ Thank you for considering contributing! Please follow these steps:
 `LinkedIn` - [Visit](https://linkedin.com/in/anshsoni) </br>
 `Follow Us` - [Visit](https://linkedin.com/company/py-shell)
 
+### Recent updates check:
+updates_to_read.md
+
 ## Thankyou 😀<br/>

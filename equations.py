@@ -6,6 +6,11 @@ from rich.prompt import Prompt
 from sympy.parsing.sympy_parser import parse_expr
 import re
 from sympy.abc import x
+import time
+import msvcrt
+from rich.table import Table
+from menu_base import MojiSwitchMenu
+from statistics_menu import show_statistics_menu
 
 console = Console()
 
@@ -120,3 +125,150 @@ class Equations:
                 "Please ensure your equation is in the correct format.",
                 title="⚠️ Invalid Input", border_style="red"
             ))
+
+def show_equations_menu():
+    # Define options for equation operations
+    options = [
+        ("➕ Basic Math", "basic"),
+        ("📐 Algebra", "algebra"),
+        ("📊 Calculus", "calculus"),
+        ("📈 Statistics", "stats"),
+        ("🔢 Matrix", "matrix")
+    ]
+    
+    def on_execute(state):
+        # Get list of enabled operations
+        enabled_ops = [name for name, value in options if state[value]]
+        if not enabled_ops:
+            console.print("[bold red]No operations selected![/bold red]")
+            return
+            
+        # Animate calculation
+        animate_calculation()
+        
+        # Process each enabled operation
+        results = {}
+        for op in enabled_ops:
+            # Simulate calculation
+            time.sleep(0.5)
+            results[op] = f"Result for {op}"
+            
+        # Display results
+        animate_results_display(results)
+    
+    # Create and run menu
+    menu = MojiSwitchMenu(
+        title="🧮 Equation Operations",
+        options=options,
+        on_execute=on_execute
+    )
+    menu.run()
+
+def display_equation_table(equations):
+    """Display equations in a modern table format"""
+    table = Table(
+        show_header=True,
+        header_style="bold cyan",
+        box=None,
+        padding=(0, 1)
+    )
+    
+    # Add columns
+    table.add_column("No.", style="dim", width=4)
+    table.add_column("Type", style="bold")
+    table.add_column("Description", style="italic")
+    table.add_column("Status", justify="center", width=4)
+    
+    # Add rows with equation types
+    features = [
+        ("1", "Basic Math", "Arithmetic and algebraic operations", "basic"),
+        ("2", "Algebra", "Solve linear and quadratic equations", "algebra"),
+        ("3", "Calculus", "Derivatives and integrals", "calculus"),
+        ("4", "Statistics", "Statistical formulas and calculations", "stats"),
+        ("5", "Matrix", "Matrix operations and determinants", "matrix")
+    ]
+    
+    for no, name, desc, key in features:
+        status = "✅" if equations.get(key, False) else "❌"
+        table.add_row(no, name, desc, status)
+        
+    # Create panel with table
+    panel = Panel(
+        table,
+        title="🧮 Equation Types",
+        border_style="cyan",
+        padding=(1, 2)
+    )
+    
+    console.print(panel)
+
+def animate_calculation():
+    """Animate calculation with a spinning effect"""
+    spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+    console.print("\n")
+    for _ in range(20):  # 2 seconds of animation
+        for char in spinner:
+            console.print(f"\033[A\033[K[bold blue]{char} Calculating...[/bold blue]")
+            time.sleep(0.1)
+    console.print("\n")
+
+def animate_results_display(results):
+    """Animate results display with a fade-in effect"""
+    console.print("\n")
+    for i in range(3):
+        console.print("\033[A\033[K", end="")
+        if i == 0:
+            for key, value in results.items():
+                console.print(f"[grey50]{key}: {value}[/grey50]")
+        elif i == 1:
+            for key, value in results.items():
+                console.print(f"[bold blue]{key}: {value}[/bold blue]")
+        else:
+            for key, value in results.items():
+                console.print(f"[bold green]{key}: {value}[/bold green]")
+        time.sleep(0.2)
+    console.print("\n")
+
+def animate_equation_solving(equation):
+    """Animate equation solving with a step-by-step effect"""
+    console.print("\n")
+    steps = [
+        f"Original equation: {equation}",
+        "Simplifying...",
+        "Solving for x...",
+        "Checking solution..."
+    ]
+    
+    for step in steps:
+        console.print(f"\033[A\033[K[bold blue]{step}[/bold blue]")
+        time.sleep(0.5)
+    console.print("\n")
+
+def animate_matrix_operation():
+    """Animate matrix operation with a progress bar effect"""
+    console.print("\n")
+    for i in range(10):
+        progress = "█" * i + "░" * (10 - i)
+        console.print(f"\033[A\033[K[bold blue]Performing matrix operation: [{progress}] {i*10}%[/bold blue]")
+        time.sleep(0.2)
+    console.print("\n")
+
+def solve_equation(equation_str):
+    try:
+        # Split equation into left and right sides
+        left, right = equation_str.split('=')
+        
+        # Convert strings to sympy expressions
+        left_expr = parse_expr(left.strip())
+        right_expr = parse_expr(right.strip())
+        
+        # Create equation
+        equation = Eq(left_expr, right_expr)
+        
+        # Solve equation
+        solution = solve(equation, x)
+        
+        return solution
+    except Exception as e:
+        console.print(f"Error solving equation: {e}", style="bold red")
+        return None
