@@ -1,26 +1,37 @@
-import os, time, psutil, json, pyperclip, random, string, threading, time, pyfiglet, config
+import json
+import os
+import random
+import string
+import threading
+import time
+
+import psutil
+import pyfiglet
+import pyperclip
 from rich.console import Console
 from rich.prompt import Prompt
 
-# dependencies
-from weather import Weather
-from task import Task
-from linux_commands import Commands
-from git_commands import Git
-from terminals import Terminal
-from song import Song
+import config
 from equations import Equations
 from game import Game
-from statistical import StatisticsCalculator
+from git_commands import Git
 from graphs import GraphPlotter
+from linux_commands import Commands
+from song import Song
+from statistical import StatisticsCalculator
+from stocks import Stock
+from task import Task
+from terminals import Terminal
+from weather import Weather
 
 console = Console()
 USER_FILE = "users.json"
 lock = threading.Lock()
 scheduled_jobs = {}
-commands = {} 
+commands = {}
 stop_scheduler = False
 prompt_flag = True
+
 
 # Load users
 def load_users():
@@ -30,25 +41,31 @@ def load_users():
                 return json.load(file)
     return {}
 
+
 def save_users(users):
     with lock:
         with open(USER_FILE, "w") as file:
             json.dump(users, file, indent=4)
+
 
 def clipboard_copy(text):
     with lock:
         pyperclip.copy(text)
         console.print("Text copied to clipboard!", style="bold green")
 
+
 def clipboard_paste():
     with lock:
         console.print(f"Clipboard Content: {pyperclip.paste()}", style="bold yellow")
+
 
 # User Authentication
 def register_user():
     users = load_users()
     username = Prompt.ask("Enter new username")
-    role = Prompt.ask("Assign role (admin/user)", choices=["admin", "user"], default="user")
+    role = Prompt.ask(
+        "Assign role (admin/user)", choices=["admin", "user"], default="user"
+    )
     if username in users:
         console.print("User already exists!", style="bold red")
         return register_user()
@@ -57,6 +74,7 @@ def register_user():
     save_users(users)
     console.print("User registered successfully!", style="bold green")
     return username, role
+
 
 def login_user():
     users = load_users()
@@ -69,10 +87,12 @@ def login_user():
         console.print("Invalid credentials!", style="bold red")
         return login_user()
 
+
 # Synchronization
 def list_processes(*args):
-    for proc in psutil.process_iter(['pid', 'name']):
+    for proc in psutil.process_iter(["pid", "name"]):
         console.print(f"{proc.info['pid']} - {proc.info['name']}")
+
 
 def kill_process(args):
     if not args:
@@ -84,6 +104,7 @@ def kill_process(args):
     except Exception as e:
         console.print(str(e), style="bold red")
 
+
 def generate_password(*args):
     length = Prompt.ask("Enter password length (default 12)", default="12")
     try:
@@ -93,18 +114,19 @@ def generate_password(*args):
         length = 12
         display_prompt(username)
         return
-    
+
     characters = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(random.choice(characters) for _ in range(length))
+    password = "".join(random.choice(characters) for _ in range(length))
     console.print(f"Generated Password: {password}", style="bold green")
     clipboard_copy(password)
 
 
-# changing and displaying terminal 
+# changing and displaying terminal
 terminal = Terminal()
 
+
 def display_prompt(username):
-    if config.current_terminal_layout == 1:  
+    if config.current_terminal_layout == 1:
         Terminal().terminal_1()
     elif config.current_terminal_layout == 2:
         Terminal().terminal_2()
@@ -120,32 +142,37 @@ def display_prompt(username):
         Terminal().terminal_7()
     elif config.current_terminal_layout == 8:
         Terminal().terminal_8()
-        
+
     console.print(terminal.get_prompt())
-       
-    
-# clear console 
+
+
+# clear console
 def clear(*args):
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system("cls" if os.name == "nt" else "clear")
+
 
 def main():
     console.clear()
     ascii_banner = pyfiglet.figlet_format("PyShell")
     print(ascii_banner)
-    
+
     global username
-    username, role = register_user() if Prompt.ask("New user?", choices=["y", "n"]) == "y" else login_user()
-    
+    username, role = (
+        register_user()
+        if Prompt.ask("New user?", choices=["y", "n"]) == "y"
+        else login_user()
+    )
     # Objects
     cmds = Commands()
     task = Task()
     weather = Weather()
+    stock = Stock()
     terminl = Terminal()
     git = Git()
     eq = Equations()
     stats = StatisticsCalculator()
     graph = GraphPlotter()
-    
+
     commands = {
         "rename": cmds.rename_item,
         "move": cmds.move_file,
@@ -162,8 +189,10 @@ def main():
         "differential": lambda args: eq.solve_differential(args),
         "math-help": cmds.math_help,
         "weather": weather.get_weather,
-        "schedule": task.schedule_task,  
-        "tasks": task.list_scheduled_tasks,  
+        "stock": stock.get_stock_info,
+        "stocks": stock.get_multiple_stocks,
+        "schedule": task.schedule_task,
+        "tasks": task.list_scheduled_tasks,
         "unschedule": task.remove_scheduled_task,
         "stop": task.stop_running_tasks,
         "cls": clear,
@@ -171,7 +200,6 @@ def main():
         "game": lambda args: Game.play_game(" ".join(args)),
         "plot": lambda args: graph.run(),
         "exit": lambda _: exit(),
-        
         # Git Commands (Using Git Class)
         "git-status": git.git_status,
         "git-branches": git.git_branches,
@@ -184,7 +212,6 @@ def main():
         "git-clone": git.git_clone,
         "git-add": git.git_add,
         "git-commit": git.git_commit,
-        
         # Unique Git Features
         "play": lambda args: Song.play_song(" ".join(args)),
         "git-smart": git.git_smart_commit,
@@ -199,24 +226,24 @@ def main():
         "git-reminder": git.git_reminder,
         "git-offline_sync": git.git_offline_sync,
     }
-    
+
     scheduler_thread = threading.Thread(target=Task().run_scheduler, daemon=True)
     scheduler_thread.start()
-    
+
     while True:
         display_prompt(username)
         command = input().strip().lower().split()
-        
+
         if not command:
             continue
-        
+
         cmd, *args = command
-        
+
         start_time = time.time()
-        
+
         if not command:
             continue
-        
+
         cmd, *args = command
         start_time = time.time()
 
@@ -244,10 +271,11 @@ def main():
                 break
             else:
                 console.print("Invalid command!", style="bold red")
-        
+
         exec_time = time.time() - start_time
         console.print(f"Execution time: {exec_time:.4f} seconds", style="bold yellow")
         time.sleep(1)
+
 
 if __name__ == "__main__":
     main()
