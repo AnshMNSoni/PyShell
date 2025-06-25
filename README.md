@@ -1,10 +1,52 @@
-# PyShell - Python Based CLI 
-### (developed by @ansh.mn.soni)
+<p align="center">
+  <img src="logo.png" alt="PyShell Logo" width="300"/>
+</p>
+<h1 align="center">PyShell - Python Based CLI</h1>
+<h2 align="center">(developed by @ansh.mn.soni)</h2>
+<p align="center">🔧 Your lightweight terminal with superpowers 🚀</p>
+
+<h2>📚 Table of Contents</h2>
+
+<div align="center">
+
+<table>
+  <tr>
+    <th>Section</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>🔰 <a href="#-introduction">Introduction</a></td>
+    <td>What PyShell is and why it exists</td>
+  </tr>
+  <tr>
+    <td>🌟 <a href="#-key-features">Key Features</a></td>
+    <td>Explore the powerful built-in utilities</td>
+  </tr>
+  <tr>
+    <td>🛠️ <a href="#-how-to-use">Installation & Setup</a></td>
+    <td>Step-by-step guide to get started</td>
+  </tr>
+  <tr>
+    <td>🔮 <a href="#-future-work">Future Roadmap</a></td>
+    <td>What’s next for PyShell</td>
+  </tr>
+  <tr>
+    <td>🤝 <a href="#-contributing-to-pyshell">Contributing</a></td>
+    <td>Guidelines to help you contribute</td>
+  </tr>
+  <tr>
+    <td>🌐 <a href="#-connect-with-me">Connect with the Developer</a></td>
+    <td>Reach out via GitHub or LinkedIn</td>
+  </tr>
+</table>
+
+</div>
+
 
 ## 👉 Introduction:
 PyShell is a custom-built command-line interface (CLI) that serves as a lightweight yet powerful terminal, developed using Python. It allows users to interact with their system, manage files, process system commands, and perform various utility functions. With a focus on simplicity, speed, and usability, PyShell enhances the standard terminal experience by integrating automation, process management, and network utilities.
 
-## 🔑 Key Advantages:
+## 🔑 Key Features:
 
 #### 0️⃣ User Login for Security
 ###### Preview </br></br>
@@ -119,4 +161,4 @@ Thank you for considering contributing! Please follow these steps:
 `LinkedIn` - [Visit](https://linkedin.com/in/anshsoni) </br>
 `Follow Us` - [Visit](https://linkedin.com/company/py-shell)
 
-## Thankyou 😀<br/>
+## Thanks for using PyShell! 😊<br/>
