@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="logo.png" alt="PyShell Logo" width="300"/>
+  <img src="logo.png" alt="PyShell Logo" width="200"/>
 </p>
-<h1 align="center">PyShell - Python Based CLI</h1>
+<h1 align="center">Python Based CLI</h1>
 <h2 align="center">(developed by @ansh.mn.soni)</h2>
 <p align="center">🔧 Your lightweight terminal with superpowers 🚀</p>
 
