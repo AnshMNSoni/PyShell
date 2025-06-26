@@ -1,4 +1,4 @@
-# PyShell - Python Based CLI 
+# PyShell - Python-Based CLI 
 ### (developed by @ansh.mn.soni)
 
 ## 👉 Introduction:
