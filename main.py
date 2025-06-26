@@ -13,6 +13,10 @@ from equations import Equations
 from game import Game
 from statistical import StatisticsCalculator
 from graphs import GraphPlotter
+from dotenv import load_dotenv
+from bulk_file_rename import BulkRenamer
+
+load_dotenv()
 
 console = Console()
 USER_FILE = "users.json"
@@ -171,6 +175,15 @@ def main():
         "game": lambda args: Game.play_game(" ".join(args)),
         "plot": lambda args: graph.run(),
         "exit": lambda _: exit(),
+        "bulk-rename": lambda args: BulkRenamer.bulk_rename(
+            path=Prompt.ask("Path of folder"),
+            prefix=Prompt.ask("Prefix", default=""),
+            suffix=Prompt.ask("Suffix", default=""),
+            replace_from=Prompt.ask("replace_from", default=""),
+            replace_to=Prompt.ask("replace_to", default=""),
+            number=Prompt.ask("Want numbered files?", choices=["y","n"], default="n") == "y",
+            new_extension=Prompt.ask("New extension (for eg .txt , .docx)", default="")
+        ),
         
         # Git Commands (Using Git Class)
         "git-status": git.git_status,
