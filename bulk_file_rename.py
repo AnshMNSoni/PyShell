@@ -1,7 +1,6 @@
 import os
 
 class BulkRenamer:
-    @staticmethod
     def bulk_rename(path,prefix='',suffix='',replace_from='',replace_to='', number=False, new_extension=''):
         try:
             file = os.listdir(path)
