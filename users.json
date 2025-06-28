@@ -1,6 +1,10 @@
 {
     "ansh": {
-        "password": "123",
+        "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        "role": "admin"
+    },
+    "Mihir": {
+        "password": "e96e85632cd66c4c1d9184b1d85eeaa66b830386ccb69d1f9fed089c30b92c82",
         "role": "admin"
     }
 }

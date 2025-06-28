@@ -1,4 +1,4 @@
-import os, time, psutil, json, pyperclip, random, string, threading, time, pyfiglet, config
+import os, time, psutil, json, pyperclip, random, string, threading, time, pyfiglet, config, hashlib
 from rich.console import Console
 from rich.prompt import Prompt
 
@@ -21,6 +21,14 @@ scheduled_jobs = {}
 commands = {} 
 stop_scheduler = False
 prompt_flag = True
+
+def encrypt_password(password):
+    """Encrypt password using SHA-256"""
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def verify_password(input_password, stored_password):
+    """Verify if input password matches stored encrypted password"""
+    return encrypt_password(input_password) == stored_password
 
 # Load users
 def load_users():
@@ -52,8 +60,9 @@ def register_user():
     if username in users:
         console.print("User already exists!", style="bold red")
         return register_user()
-    password = Prompt.ask("Enter password", password=True)
-    users[username] = {"password": password, "role": role}
+    password = input("Enter password: ")
+    encrypted_password = encrypt_password(password)
+    users[username] = {"password": encrypted_password, "role": role}
     save_users(users)
     console.print("User registered successfully!", style="bold green")
     return username, role
@@ -61,13 +70,13 @@ def register_user():
 def login_user():
     users = load_users()
     username = Prompt.ask("Enter username")
-    password = Prompt.ask("Enter password", password=True)
-    if username in users and users[username]["password"] == password:
+    password = input("Enter password: ")
+    if username in users and verify_password(password, users[username]["password"]):
         console.print("Login successful!", style="bold green")
         return username, users[username]["role"]
     else:
         console.print("Invalid credentials!", style="bold red")
-        return login_user()
+        return None, None
 
 # Synchronization
 def list_processes(*args):
@@ -134,7 +143,17 @@ def main():
     print(ascii_banner)
     
     global username
-    username, role = register_user() if Prompt.ask("New user?", choices=["y", "n"]) == "y" else login_user()
+    
+    # Handle user authentication
+    while True:
+        if Prompt.ask("New user?", choices=["y", "n"]) == "y":
+            username, role = register_user()
+            break
+        else:
+            username, role = login_user()
+            if username is not None and role is not None:
+                break
+            console.print("Please try again.", style="bold yellow")
     
     # Objects
     cmds = Commands()

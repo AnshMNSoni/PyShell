@@ -1,0 +1,23 @@
+services:
+  pyshell:
+    build: .
+    container_name: pyshell-terminal
+    volumes:
+      # Mount the current directory for development
+      - .:/app
+      # Mount user data for persistence
+      - ./users.json:/app/users.json
+      - ./high_score.txt:/app/high_score.txt
+      # Mount game high scores
+      - ./game/Ping-Pong/high_score.txt:/app/game/Ping-Pong/high_score.txt
+      - ./game/Snake-Game/high-score.txt:/app/game/Snake-Game/high-score.txt
+    environment:
+      - DISPLAY=${DISPLAY}
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    stdin_open: true
+    tty: true
+    # For interactive terminal usage
+    command: python main.py
+    # Remove restart policy for interactive terminal
+    restart: "no" 

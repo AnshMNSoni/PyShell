@@ -4,6 +4,28 @@
 ## 👉 Introduction:
 PyShell is a custom-built command-line interface (CLI) that serves as a lightweight yet powerful terminal, developed using Python. It allows users to interact with their system, manage files, process system commands, and perform various utility functions. With a focus on simplicity, speed, and usability, PyShell enhances the standard terminal experience by integrating automation, process management, and network utilities.
 
+## 🐳 Quick Start with Docker (Recommended)
+
+### Prerequisites
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
+- Refer to [INSTALL.md](INSTALL.md) if you run into any problems installing Docker.
+### One-Command Setup
+```bash
+# Clone the repository
+git clone https://github.com/AnshMNSoni/PyShell.git
+cd PyShell
+
+# Use the automated setup script
+python setup.py
+
+# Or use the convenience script (Windows)
+scripts\run-docker.bat
+
+```
+
+For detailed Docker documentation, see [README-Docker.md](README-Docker.md)
+
+
 ## 🔑 Key Advantages:
 
 #### 0️⃣ User Login for Security
@@ -47,7 +69,7 @@ PyShell is a custom-built command-line interface (CLI) that serves as a lightwei
 
 #### 8️⃣ Play Song right through terminal
 ###### Preview </br></br>
-![Screenshot 2025-05-18 132600](https://github.com/user-attachments/assets/d254ab8b-da7f-4d78-b5c3-45233a9ffd96)
+![Screenshot 2025-05-18 132600](https://github.com/user-attachments/assets/d2548b8b-da7f-4d78-b5c3-45233a9ffd96)
 
 ![Screenshot 2025-05-18 132534](https://github.com/user-attachments/assets/f1c38833-bed4-47ab-8b20-ce046474c1e0)
 
@@ -63,7 +85,7 @@ PyShell is a custom-built command-line interface (CLI) that serves as a lightwei
 
 ![Screenshot 2025-05-18 130227](https://github.com/user-attachments/assets/2fd1dda3-8e27-4ffc-b3a5-44dcd04765b3)
 
-![Screenshot 2025-05-18 130301](https://github.com/user-attachments/assets/9fba52c3-b1a2-417e-9180-a5a1935cbb33)
+![Screenshot 2025-05-18 130301](https://github.com/user-attachments/assets/2f6dcd75-5a90-4f9f-802b-b36fbbe6a25e)
 
 #### 🔟 Calculus Operations in Calculator
 ###### Preview </br></br>
@@ -76,28 +98,41 @@ PyShell is a custom-built command-line interface (CLI) that serves as a lightwei
 #### and many more...
 
 ## 🧑‍💻 How to use:
-1️⃣ Clone the Repository:</br>
-```sh
+
+### Option 1: Docker Setup (Recommended)
+```bash
+# Clone the Repository
 git clone https://github.com/AnshMNSoni/PyShell.git
+cd PyShell
+
+# SignUp to Open Weather For weather API: [Visit](https://openweathermap.org/)
+# Replace you API_KEY:
+# Inside `get_weather` function
+# api_key = "YOUR_API_KEY" </br>
+
+# Use automated setup
+python setup.py
+
+# Or use the convenience script (Windows)
+scripts\run-docker.bat
 ```
 
-2️⃣ Install all require dependencies:</br>
-```sh
+### Option 2: Traditional Setup
+```bash
+# Clone the Repository
+git clone https://github.com/AnshMNSoni/PyShell.git
+cd PyShell
+
+# Install all require dependencies
 pip install -r requirements.txt
-```
 
-3️⃣ SignUp to Open Weather For weather API: [Visit](https://openweathermap.org/)
+# SignUp to Open Weather For weather API: [Visit](https://openweathermap.org/)
 
-4️⃣ Replace you API_KEY:
-- Inside `get_weather` function
-- api_key = "YOUR_API_KEY" </br>
+# Replace you API_KEY:
+# Inside `get_weather` function
+# api_key = "YOUR_API_KEY" </br>
 
-###### Preview</br></br>
-![image](https://github.com/user-attachments/assets/b6928f38-0319-48ba-aaaf-39d1f7b873e7)
-</br>
-
-5️⃣ Lastly, Open you terminal and run:</br>
-```sh
+# Run PyShell
 python main.py
 ```
 
