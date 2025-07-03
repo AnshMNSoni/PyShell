@@ -1,122 +1,688 @@
-# PyShell - Python-Based CLI 
-### (developed by @ansh.mn.soni)
+# PyShell Web Terminal 🌐
 
-## 👉 Introduction:
-PyShell is a custom-built command-line interface (CLI) that serves as a lightweight yet powerful terminal, developed using Python. It allows users to interact with their system, manage files, process system commands, and perform various utility functions. With a focus on simplicity, speed, and usability, PyShell enhances the standard terminal experience by integrating automation, process management, and network utilities.
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Responsive](https://img.shields.io/badge/Responsive-Yes-green)](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
 
-## 🔑 Key Advantages:
+> A stunning web-based terminal interface that brings the power and aesthetics of PyShell to your browser with retro-futuristic styling and smooth animations.
 
-#### 0️⃣ User Login for Security
-###### Preview </br></br>
-![image](https://github.com/user-attachments/assets/d9dacb15-f89c-4fd1-a28c-ef0b8915c4f5)
+**Developed by [@ansh.mn.soni](https://github.com/AnshMNSoni)**
 
-#### 1️⃣ Task Scheduling
-###### Preview </br></br>
-![image](https://github.com/user-attachments/assets/d0cf8b40-52ca-47a4-a60c-26278e65bc69)
+---
 
-#### 2️⃣ Weather Tracking
-###### Preview </br></br>
-![image](https://github.com/user-attachments/assets/953cbd34-397b-45be-a274-4e0d2e584c4b)
+## 📋 Table of Contents
 
-#### 3️⃣ in-built Calculator
-###### Preview </br></br>
-![image](https://github.com/user-attachments/assets/f65045b0-9e4c-43e8-a46c-403344480542)
+- [Overview](#overview)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Usage Guide](#usage-guide)
+- [Customization](#customization)
+- [API Reference](#api-reference)
+- [Styling Guide](#styling-guide)
+- [Browser Support](#browser-support)
+- [Contributing](#contributing)
+- [License](#license)
 
-#### 4️⃣ Automate Password Generator
-###### Preview </br></br>
-![image](https://github.com/user-attachments/assets/0ad4ac81-66dc-495f-a897-2cb27f3997e0)
+---
 
-#### 5️⃣ Supports all basic linux commands
-- `ls`
-- `ls -all`
-- `mkdir`
-- `touch`
-- `rm`
-- `sysinfo`
-- `network` etc...
+## 🔍 Overview
 
-#### 6️⃣ Supports synchronization
-- `list process`
-- `kill process`
-- `force stop`
-- `renaming file` in between the program
+The PyShell Web Terminal is a sophisticated browser-based terminal emulator that combines the functionality of a command-line interface with stunning visual design. Built with modern web technologies, it provides an immersive terminal experience with syntax highlighting, multiple output types, and responsive design.
 
-#### 7️⃣ Simple and Clean Terminal
-###### Preview </br></br>
-![Screenshot 2025-05-18 125323](https://github.com/user-attachments/assets/55692d28-4f35-4236-b9ac-c976e85d5891)
+### Key Highlights
+- 🎨 **Retro-Futuristic Design**: Dark theme with animated static background
+- ⚡ **Real-time Processing**: Simulated command execution with loading states
+- 🎯 **Syntax Highlighting**: Color-coded output for different content types
+- 📱 **Responsive Layout**: Works seamlessly across all device sizes
+- ♿ **Accessible**: Full keyboard navigation and screen reader support
+- 🔧 **Extensible**: Easy to customize and add new commands
 
-#### 8️⃣ Play Song right through terminal
-###### Preview </br></br>
-![Screenshot 2025-05-18 132600](https://github.com/user-attachments/assets/d254ab8b-da7f-4d78-b5c3-45233a9ffd96)
+---
 
-![Screenshot 2025-05-18 132534](https://github.com/user-attachments/assets/f1c38833-bed4-47ab-8b20-ce046474c1e0)
+## ✨ Features
 
-#### 9️⃣ Change terminal Functionality
-###### Preview </br></br>
-![Screenshot 2025-05-18 130106](https://github.com/user-attachments/assets/da67e659-b3ec-4a57-9cf9-a25558248b9c)
+### 🎨 Visual Features
+- **Animated Background**: Dynamic static effect with subtle flickering
+- **Window Controls**: Functional close, minimize, and maximize buttons
+- **Status Bar**: Real-time clock and system information
+- **Smooth Transitions**: Elegant hover effects and animations
+- **Custom Scrollbar**: Themed scrollbar matching the terminal aesthetic
 
-![Screenshot 2025-05-18 130126](https://github.com/user-attachments/assets/84487e3f-4d4e-43e2-9172-9bf1490dbdaf)
+### 💻 Terminal Features
+- **Command History**: Visual history of executed commands
+- **Multiple Output Types**: Success, error, warning, and info messages
+- **Loading Indicators**: Visual feedback during command processing
+- **Syntax Highlighting**: Color-coded code blocks with language-specific styling
+- **Auto-focus**: Automatic input focus for seamless typing experience
 
-![Screenshot 2025-05-18 130147](https://github.com/user-attachments/assets/94dd78a3-b3e7-467e-9aa2-a480c494d053)
+### 🔧 Interactive Elements
+- **Built-in Commands**: Pre-configured commands for demonstration
+- **Keyboard Shortcuts**: Ctrl+L to clear terminal
+- **Click-to-focus**: Clicking anywhere focuses the input
+- **Responsive Controls**: Touch-friendly on mobile devices
 
-![Screenshot 2025-05-18 130201](https://github.com/user-attachments/assets/d59e18b1-c88b-44cf-badb-7eabd787aff7)
+---
 
-![Screenshot 2025-05-18 130227](https://github.com/user-attachments/assets/2fd1dda3-8e27-4ffc-b3a5-44dcd04765b3)
+## 🚀 Getting Started
 
-![Screenshot 2025-05-18 130301](https://github.com/user-attachments/assets/9fba52c3-b1a2-417e-9180-a5a1935cbb33)
+### Prerequisites
+- Modern web browser (Chrome 90+, Firefox 88+, Safari 14+, Edge 90+)
+- Basic understanding of HTML/CSS/JavaScript (for customization)
 
-#### 🔟 Calculus Operations in Calculator
-###### Preview </br></br>
-![Screenshot 2025-05-18 131128](https://github.com/user-attachments/assets/964a179f-0cf6-457a-b12e-b3c9021f9bf0)
+### Quick Setup
 
-![Screenshot 2025-05-18 131248](https://github.com/user-attachments/assets/2f6dcd75-5a90-4f9f-802b-b36fbbe6a25e)
+1. **Download the File**
+   ```bash
+   # Save the HTML file as 'pyshell-terminal.html'
+   curl -O https://your-repo.com/pyshell-terminal.html
+   ```
 
-![Screenshot 2025-05-18 131424](https://github.com/user-attachments/assets/a34d24c1-1a6b-4be2-88b8-1d1abd43f801)
+2. **Open in Browser**
+   ```bash
+   # Simply double-click the file or open with your browser
+   open pyshell-terminal.html
+   ```
 
-#### and many more...
+3. **Start Using**
+   - Type `help` to see available commands
+   - Try `demo` to see all styling options
+   - Use `clear` to reset the terminal
 
-## 🧑‍💻 How to use:
-1️⃣ Clone the Repository:</br>
-```sh
-git clone https://github.com/AnshMNSoni/PyShell.git
+### Integration into Web Projects
+
+```html
+<!-- Include in your HTML page -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Your page head content -->
+</head>
+<body>
+    <!-- Embed the terminal -->
+    <iframe src="pyshell-terminal.html" 
+            width="100%" 
+            height="600px" 
+            frameborder="0">
+    </iframe>
+</body>
+</html>
 ```
 
-2️⃣ Install all require dependencies:</br>
-```sh
-pip install -r requirements.txt
+---
+
+## 💡 Usage Guide
+
+### Basic Commands
+
+| Command | Description | Example Output |
+|---------|-------------|----------------|
+| `help` | Show available commands | Command list with descriptions |
+| `demo` | Display all styling examples | Showcases all output types |
+| `clear` | Clear terminal screen | Removes all output |
+| `time` | Show current date/time | Current timestamp |
+| `version` | Show terminal version | Version and build info |
+| `error` | Display error example | Red-styled error message |
+| `warning` | Display warning example | Yellow-styled warning |
+| `success` | Display success example | Green-styled success message |
+
+### Command Execution Flow
+
+1. **Type Command**: Enter command in the input field
+2. **Press Enter**: Command is added to history
+3. **Processing**: Loading indicator appears
+4. **Output**: Styled result is displayed
+5. **Ready**: Input field is re-focused for next command
+
+### Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Enter` | Execute command |
+| `Ctrl + L` | Clear terminal |
+| `Tab` | Focus input field |
+| `Esc` | Blur input field |
+
+---
+
+## 🎨 Customization
+
+### Color Scheme Modification
+
+The terminal uses CSS custom properties for easy theming:
+
+```css
+:root {
+    --primary-bg: rgba(45, 27, 27, 0.9);
+    --secondary-bg: rgba(60, 20, 20, 0.85);
+    --accent-color: #c89632;
+    --text-color: #e8dcc6;
+    --success-color: #5a7a5a;
+    --error-color: #a03030;
+    --warning-color: #c89632;
+    --info-color: #6b8a9a;
+}
 ```
 
-3️⃣ SignUp to Open Weather For weather API: [Visit](https://openweathermap.org/)
+### Adding New Commands
 
-4️⃣ Replace you API_KEY:
-- Inside `get_weather` function
-- api_key = "YOUR_API_KEY" </br>
+Extend the `processCommand()` function:
 
-###### Preview</br></br>
-![image](https://github.com/user-attachments/assets/b6928f38-0319-48ba-aaaf-39d1f7b873e7)
-</br>
-
-5️⃣ Lastly, Open you terminal and run:</br>
-```sh
-python main.py
+```javascript
+function processCommand(command) {
+    switch(command.toLowerCase()) {
+        case 'mycustomcommand':
+            outputDiv.className = 'output-success';
+            outputDiv.innerHTML = '<strong>Custom Command:</strong> Your output here';
+            break;
+        // ... existing cases
+    }
+}
 ```
 
-## 🔎 Future Work:
-1️⃣ Upscale it to the Operating system (i.e. MyOS)
+### Font Customization
 
-## 🤝 Contributing to PyShell
+Change the font family in the CSS:
 
-Thank you for considering contributing! Please follow these steps:
+```css
+body {
+    font-family: 'Your-Font', 'PT Mono', 'Courier Prime', monospace;
+}
+```
 
-1. **Fork** the repository.
-2. **Create a new branch** (`git checkout -b feature-branch`).
-3. **Commit your changes** (`git commit -m "Add new feature"`).
-4. **Push to your fork** (`git push origin feature-branch`).
-5. **Submit a Pull Request** and wait for review.
+### Background Customization
 
-### 🔗 Connect with Me:
-`GitHub` - [Visit](https://github.com/AnshMNSoni) </br>
-`LinkedIn` - [Visit](https://linkedin.com/in/anshsoni) </br>
-`Follow Us` - [Visit](https://linkedin.com/company/py-shell)
+Modify the background gradient and static effect:
 
-## Thankyou 😀<br/>
+```css
+body {
+    background: 
+        linear-gradient(135deg, your-colors-here),
+        url('your-static-pattern.svg');
+}
+```
+
+---
+
+## 🔧 API Reference
+
+### Core Functions
+
+#### `executeCommand(command)`
+Processes and executes a terminal command.
+
+**Parameters:**
+- `command` (string): The command to execute
+
+**Example:**
+```javascript
+executeCommand('help');
+```
+
+#### `processCommand(command)`
+Handles command logic and generates output.
+
+**Parameters:**
+- `command` (string): The command to process
+
+#### `updateTime()`
+Updates the real-time clock in the status bar.
+
+#### `scrollToBottom()`
+Scrolls terminal output to the bottom.
+
+#### `escapeHtml(text)`
+Sanitizes text for safe HTML insertion.
+
+**Parameters:**
+- `text` (string): Text to sanitize
+
+**Returns:** Escaped HTML string
+
+### CSS Classes
+
+#### Output Types
+- `.output-success`: Green success messages
+- `.output-error`: Red error messages  
+- `.output-warning`: Yellow warning messages
+- `.output-info`: Blue informational messages
+
+#### Syntax Highlighting
+- `.syntax-keyword`: Language keywords
+- `.syntax-string`: String literals
+- `.syntax-number`: Numeric values
+- `.syntax-comment`: Code comments
+- `.syntax-function`: Function names
+- `.syntax-variable`: Variable names
+
+---
+
+## 🎯 Styling Guide
+
+### Output Message Structure
+
+```html
+<div class="output-success">
+    <strong>✓ Operation Status:</strong><br>
+    Detailed message content here<br>
+    Additional context information
+</div>
+```
+
+### Code Block Structure
+
+```html
+<div class="code-block">
+    <span class="syntax-keyword">def</span> 
+    <span class="syntax-function">function_name</span>():
+        <span class="syntax-comment"># Comment</span>
+        <span class="syntax-variable">variable</span> = 
+        <span class="syntax-string">"value"</span>
+</div>
+```
+
+### Custom Styling Examples
+
+#### Success Message
+```css
+.output-success {
+    color: #5a7a5a;
+    background: rgba(90, 122, 90, 0.08);
+    border-left: 3px solid #5a7a5a;
+    padding: 12px 16px;
+}
+```
+
+#### Command History
+```css
+.command-history {
+    opacity: 0.7;
+    transition: all 0.2s ease;
+}
+
+.command-history:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.05);
+}
+```
+
+---
+
+## 🌐 Browser Support
+
+### Fully Supported
+- ✅ **Chrome 90+**: All features work perfectly
+- ✅ **Firefox 88+**: Complete compatibility
+- ✅ **Safari 14+**: Full feature support
+- ✅ **Edge 90+**: All functionality available
+
+### Partially Supported
+- ⚠️ **Internet Explorer**: Not recommended (lacks CSS Grid and modern JavaScript features)
+- ⚠️ **Older Browsers**: Some animations may not work
+
+### Required Features
+- CSS Grid Layout
+- CSS Custom Properties (Variables)
+- ES6 JavaScript (Arrow functions, const/let)
+- CSS Backdrop Filter (for blur effects)
+
+---
+
+## 📱 Responsive Design
+
+### Breakpoints
+
+#### Desktop (1024px+)
+- Full feature set
+- All status information visible
+- Complete terminal controls
+
+#### Tablet (768px - 1023px)
+- Slightly reduced padding
+- All features functional
+- Optimized touch targets
+
+#### Mobile (< 768px)
+- Hidden status bar for space
+- Larger touch targets
+- Optimized font sizes
+- Simplified header
+
+### Mobile Optimizations
+
+```css
+@media (max-width: 768px) {
+    .terminal-header {
+        padding: 10px 15px;
+    }
+    
+    .terminal-status {
+        display: none;
+    }
+    
+    .control-btn {
+        width: 18px;
+        height: 18px;
+    }
+}
+```
+
+---
+
+## 🔧 Advanced Features
+
+### Performance Optimizations
+
+#### Efficient DOM Manipulation
+- Command history is added via `insertBefore()` for better performance
+- Event delegation for better memory management
+- Optimized scrolling behavior
+
+#### CSS Performance
+- Hardware-accelerated animations using `transform`
+- Efficient backdrop-filter usage
+- Optimized gradient calculations
+
+### Security Features
+
+#### Input Sanitization
+```javascript
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+```
+
+#### Safe Command Execution
+- All user input is sanitized before display
+- No eval() or dangerous JavaScript execution
+- Controlled command set prevents malicious operations
+
+---
+
+## 🤝 How to Contribute
+
+### Development Setup
+
+1. **Clone/Download** the HTML file
+2. **Open** in your preferred code editor
+3. **Test** changes in multiple browsers
+4. **Validate** HTML/CSS/JavaScript
+
+### Contribution Areas
+
+#### 🎨 Design Improvements
+- New color schemes and themes
+- Animation enhancements
+- Better responsive design
+- Accessibility improvements
+
+#### 💻 Feature Additions
+- New built-in commands
+- Enhanced syntax highlighting
+- File system simulation
+- Network request capabilities
+
+#### 🐛 Bug Fixes
+- Cross-browser compatibility issues
+- Performance optimizations
+- Mobile experience improvements
+- Accessibility fixes
+
+### Code Style Guidelines
+
+#### HTML
+```html
+<!-- Use semantic HTML5 elements -->
+<section class="terminal-container">
+    <header class="terminal-header">
+        <!-- Well-structured, accessible markup -->
+    </header>
+</section>
+```
+
+#### CSS
+```css
+/* Use BEM methodology for class names */
+.terminal__header {
+    /* Properties in logical order */
+    display: flex;
+    align-items: center;
+    /* Use custom properties for themes */
+    color: var(--accent-color);
+}
+```
+
+#### JavaScript
+```javascript
+// Use modern ES6+ syntax
+const processCommand = (command) => {
+    // Clear, descriptive function names
+    // Handle edge cases
+    if (!command || !terminalBody) return;
+    
+    // Use template literals for complex strings
+    const output = `Command: ${command}`;
+};
+```
+
+---
+
+## 🔄 Version History
+
+### v3.2.1 (Current)
+- ✨ Added syntax highlighting for code blocks
+- 🎨 Improved visual design with better contrast
+- 📱 Enhanced mobile responsiveness
+- ♿ Added accessibility improvements
+- 🐛 Fixed scrolling issues on some browsers
+
+### Future Roadmap
+
+#### v3.3.0 (Planned)
+- [ ] **Multiple Themes**: Light/dark theme switcher
+- [ ] **Command Autocomplete**: Tab completion for commands
+- [ ] **File System Simulation**: Virtual file operations
+- [ ] **Export Functionality**: Save terminal session to file
+
+#### v4.0.0 (Future)
+- [ ] **WebSocket Integration**: Real backend connectivity
+- [ ] **Plugin System**: Extensible command architecture
+- [ ] **Multi-tab Support**: Multiple terminal sessions
+- [ ] **Custom Keybindings**: User-configurable shortcuts
+
+---
+
+## 🛠️ Troubleshooting
+
+### Common Issues
+
+#### Terminal Not Loading
+- **Problem**: Blank screen or errors
+- **Solution**: Check browser console for JavaScript errors
+- **Fix**: Ensure you're using a modern browser
+
+#### Commands Not Working
+- **Problem**: Commands don't execute
+- **Solution**: Check if JavaScript is enabled
+- **Fix**: Verify the `executeCommand` function is loaded
+
+#### Styling Issues
+- **Problem**: Broken layout or missing styles
+- **Solution**: Check CSS loading and browser support
+- **Fix**: Update browser or check CSS compatibility
+
+#### Mobile Display Problems
+- **Problem**: Poor mobile experience
+- **Solution**: Check viewport meta tag
+- **Fix**: Test responsive CSS media queries
+
+### Performance Issues
+
+#### Slow Animation
+```css
+/* Reduce animation complexity */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+```
+
+#### Memory Usage
+```javascript
+// Clean up event listeners
+window.addEventListener('beforeunload', () => {
+    // Remove event listeners
+    clearInterval(timeInterval);
+});
+```
+
+---
+
+## 📚 Examples
+
+### Basic Integration
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My App with PyShell Terminal</title>
+</head>
+<body>
+    <h1>My Application</h1>
+    
+    <!-- Embed PyShell Terminal -->
+    <div id="terminal-container">
+        <!-- Insert PyShell HTML here -->
+    </div>
+    
+    <script>
+        // Your app JavaScript
+        // PyShell JavaScript integration
+    </script>
+</body>
+</html>
+```
+
+### Custom Command Implementation
+
+```javascript
+// Extend with your own commands
+function processCommand(command) {
+    const args = command.split(' ');
+    const cmd = args[0].toLowerCase();
+    
+    switch(cmd) {
+        case 'weather':
+            const city = args[1] || 'London';
+            showWeather(city);
+            break;
+            
+        case 'calc':
+            const expression = args.slice(1).join(' ');
+            calculateExpression(expression);
+            break;
+            
+        // ... existing commands
+    }
+}
+
+function showWeather(city) {
+    // Your weather API integration
+    outputDiv.className = 'output-info';
+    outputDiv.innerHTML = `<strong>Weather in ${city}:</strong><br>
+                          Sunny, 22°C<br>
+                          Humidity: 45%`;
+}
+```
+
+---
+
+## 🌟 Showcase
+
+### Production Use Cases
+
+#### **Developer Portfolio**
+- Showcase coding skills with interactive terminal
+- Demonstrate command-line tools
+- Engage visitors with unique interface
+
+#### **Educational Platforms**
+- Teach command-line basics
+- Interactive coding tutorials
+- Safe environment for learning
+
+#### **Corporate Websites**
+- Unique "About Us" interface
+- Technical company branding
+- Developer-friendly contact forms
+
+### Community Projects
+
+Share your PyShell implementations:
+- Personal portfolio sites
+- Educational tools
+- Creative art projects
+- Technical demonstrations
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### Usage Rights
+- ✅ Commercial use
+- ✅ Modification
+- ✅ Distribution
+- ✅ Private use
+
+### Requirements  
+- 📝 License and copyright notice
+
+---
+
+## 🙏 Acknowledgments
+
+- **Font Sources**: Google Fonts (PT Mono, Courier Prime)
+- **Inspiration**: Classic terminal emulators and retro computing
+- **Community**: Developers who provided feedback and suggestions
+- **Tools**: Modern web standards and browser technologies
+
+---
+
+## 🌐 Connect & Support
+
+### Get Help
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/AnshMNSoni/PyShell/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/AnshMNSoni/PyShell/discussions)
+- 📧 **Email**: [Contact Developer](mailto:ansh.mn.soni@example.com)
+
+### Follow Development
+- 🐙 **GitHub**: [@AnshMNSoni](https://github.com/AnshMNSoni)
+- 💼 **LinkedIn**: [Professional Profile](https://linkedin.com/in/anshsoni)
+- 🏢 **Company**: [PyShell Organization](https://linkedin.com/company/py-shell)
+
+### Show Support
+- ⭐ **Star the Repository** on GitHub
+- 🍴 **Fork and Contribute** to the project
+- 📢 **Share** with fellow developers
+- 💡 **Suggest Features** for future versions
+
+---
+
+<div align="center">
+
+**🚀 Ready to enhance your web projects with PyShell Terminal? 🚀**
+
+*Built with ❤️ using modern web technologies*
+
+**[⬆️ Back to Top](#pyshell-web-terminal-)**
+
+</div>
