@@ -198,7 +198,6 @@ play ~/Music/playlist/
 |---------|-------------|---------|
 | `sysinfo` | System information | `sysinfo` |
 | `network` | Network diagnostics | `network status` |
-| `process` | Process management | `list process` |
 | `kill` | Terminate process | `kill 1234` |
 
 ### Utility Commands
@@ -238,10 +237,10 @@ Built-in music player supporting multiple formats:
 
 ### 🎨 Theme Customization
 Multiple color schemes and interface layouts:
-- Dark theme
-- Light theme
-- High contrast theme
-- Custom color combinations
+- Galactic Empire
+- Hacker Green
+- Atomic-Lite
+- And many more
 
 ---
 
@@ -276,22 +275,9 @@ We welcome contributions from the community! Here's how you can help:
 ## 🗺️ Roadmap
 
 ### Version 2.0 (Coming Soon)
-- [ ] **Plugin System**: Support for third-party extensions
-- [ ] **Command History**: Persistent command history with search
-- [ ] **Auto-completion**: Intelligent command and path completion
-- [ ] **Configuration Files**: User-specific settings and preferences
-
-### Version 3.0 (Future)
-- [ ] **GUI Integration**: Optional graphical interface
-- [ ] **Remote Access**: SSH-like remote terminal access
-- [ ] **Cloud Integration**: Cloud storage and synchronization
-- [ ] **AI Assistant**: Intelligent command suggestions
-
-### Long-term Vision
-- [ ] **Operating System**: Full PyShell-based OS (MyOS)
-- [ ] **Mobile App**: PyShell mobile companion
-- [ ] **Web Interface**: Browser-based terminal access
-
+- [ ] **Upscaling**: We Upscale PyShell to Operating systems (i.e. MyOS)
+ 
+ <!--- You can add futher more updates ---> 
 ---
 
 ## 📞 Support
