@@ -124,7 +124,7 @@ The following Python packages are required:
    ```
 
 ### Customization Options
-- **Theme Selection**: Use the `theme` command to change colors
+- **Theme Selection**: Use the `terminal` command to change colors
 - **Default Directory**: Set your preferred starting directory
 - **Command Aliases**: Create custom shortcuts for frequently used commands
 
@@ -207,9 +207,8 @@ play ~/Music/playlist/
 | `weather` | Weather information | `weather London` |
 | `calc` | Calculator | `calc 2^8` |
 | `schedule` | Task scheduler | `schedule "Meeting" 15:00` |
-| `genpass` | Generate password | `genpass 16` |
 | `play` | Music player | `play song.mp3` |
-| `theme` | Change theme | `theme dark` |
+| `terminal` | Change theme | `Galactic Empire` |
 
 ---
 
