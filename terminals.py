@@ -405,6 +405,103 @@ class Terminal:
         self.set_prompt(prompt)
         return prompt
 
+    def terminal_9(self):
+        # Star Wars themed terminal
+        start_time = time.time()
+        
+        # Gather system information
+        folder = os.path.basename(os.getcwd())
+        hostname = socket.gethostname().split('.')[0]
+        user = os.getenv("USER") or os.getenv("USERNAME") or "rebel"
+        current_time = datetime.now().strftime("%H:%M")
+        
+        # Memory usage (like Death Star power levels)
+        mem = psutil.virtual_memory()
+        mem_percent = mem.percent
+        
+        # Git branch info
+        try:
+            branch = subprocess.check_output(
+                ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                stderr=subprocess.DEVNULL
+            ).decode().strip()
+        except subprocess.CalledProcessError:
+            branch = "no-repo"
+        
+        # Git status (like rebel intelligence)
+        try:
+            status_output = subprocess.check_output(
+                ["git", "status", "--porcelain"],
+                stderr=subprocess.DEVNULL
+            ).decode().strip()
+            changes = len(status_output.splitlines())
+        except subprocess.CalledProcessError:
+            changes = 0
+        
+        end_time = time.time()
+        exec_time = f"{int((end_time - start_time) * 1000)}ms"
+        
+        # Build the Galactic Empire themed prompt
+        left = Text()
+        left.append("\n", style="white on black")
+        left.append(" Incoming Imperial Transmission: ", style="white on black")
+        left.append("", style="black on grey23")
+        
+        # User section (like an Imperial officer identification)
+        left.append("", style="white on grey23")
+        left.append(f" OFFICER: {user} ", style="white on grey23")
+        left.append("", style="grey23 on black")
+        
+        # Current sector (folder)
+        left.append("", style="white on grey37")
+        left.append(f" SECTOR: {folder} ", style="white on grey37")
+        left.append("", style="grey37 on black")
+        
+        # Time and system status
+        left.append("", style="white on grey50")
+        left.append(f" Time: {current_time} | ⚡ {mem_percent}% POWER ", style="white on grey50")
+        left.append("", style="grey50 on black")
+        
+        # Right side - Git status as Imperial intelligence
+        right = Text()
+        if branch != "no-repo":
+            right.append("", style="white on red")
+            right.append(f" STATUS: {branch} ", style="white on red")
+            if changes > 0:
+                right.append("", style="red on bright_red")
+                right.append(f" {changes} ALERTS ", style="white on bright_red")
+                right.append("", style="bright_red on black")
+            else:
+                right.append("", style="red on black")
+        else:
+            right.append("", style="white on grey30")
+            right.append(" 🌌 NO DATA ", style="white on grey30")
+            right.append("", style="grey30 on black")
+        
+        # Add execution time
+        right.append(f" ⚡ {exec_time} ", style="grey70 on black")
+        
+        # Second line with Imperial quote
+        second_line = Text()
+        second_line.append("\n", style="red")
+        second_line.append("The Empire commands", style="red italic")
+        second_line.append(" > ", style="white bold")
+        
+        # Calculate spacing for the first line
+        spacing = " " * max(console.width - len(left.plain) - len(right.plain), 1)
+        
+        global prompt
+        prompt = left + Text(spacing) + right + second_line
+        self.set_prompt(prompt)
+        return prompt
+    
+# This module provides various terminal layouts for PyShell.
+# Each terminal layout is a method that sets the prompt style and content.
+
+
+# Global instance of Terminal
+
+
     def change_terminal(self, *args):
         global prompt_flag
         prompt_flag = False
@@ -419,7 +516,8 @@ class Terminal:
             "5 - Clean Detailed",
             "6 - Atomic-Lite",
             "7 - PyShell Default",
-            "8 - Softline"
+            "8 - Softline",
+            "9 - Galactic Empire",
         ]
 
         choice = questionary.select(
