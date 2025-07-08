@@ -1,0 +1,15 @@
+[
+  { "input": "show hidden files", "output": "ls -a" },
+  { "input": "list all files including subdirectories", "output": "ls -R" },
+  { "input": "go to the home directory", "output": "cd 'name of the directory' " },
+  { "input": "delete all .log files", "output": "rm *.log" },
+  { "input": "create a folder named test", "output": "mkdir test" },
+  { "input": "copy file.txt to the backup folder", "output": "cp file.txt backup/" },
+  { "input": "move all .jpg files to images directory", "output": "mv *.jpg images/" },
+  { "input": "show current directory path", "output": "pwd" },
+  { "input": "find files with .py extension", "output": "find . -name \"*.py\"" },
+  { "input": "display content of a file called notes.txt", "output": "cat notes.txt" },
+  { "input": "clear the output " , "output" : "clear"},
+  { "input": "extract a zip file", "output": "unzip file.zip" },
+  { "input": "check available memory", "output": "free -h" }
+]
