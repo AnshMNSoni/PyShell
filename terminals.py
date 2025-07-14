@@ -404,7 +404,89 @@ class Terminal:
         prompt = left + Text(spacing) + right
         self.set_prompt(prompt)
         return prompt
+    
+    def terminal_9(self):
+        start_time = time.time()
+    
+        # System Information
+        user = os.getenv("USER") or os.getenv("USERNAME") or "rebel"
+        hostname = socket.gethostname().split('.')[0]
+        folder = os.path.basename(os.getcwd())
+        current_time = datetime.now().strftime("%d/%m/%y %H:%M")
+    
+        # Memory usage
+        mem = psutil.virtual_memory()
+        mem_percent = mem.percent
+    
+        # Git branch info
+        try:
+            branch = subprocess.check_output(
+                ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                stderr=subprocess.DEVNULL
+            ).decode().strip()
+        except subprocess.CalledProcessError:
+            branch = ""
+    
+        # Git status (changes)
+        try:
+            status_output = subprocess.check_output(
+                ["git", "status", "--porcelain"],
+                stderr=subprocess.DEVNULL
+            ).decode().strip()
+            changes = len(status_output.splitlines())
+        except subprocess.CalledProcessError:
+            changes = 0
+    
+        end_time = time.time()
+        exec_time = f"{int((end_time - start_time) * 1000)}ms"
+    
+        # LEFT prompt
+        left = Text()
+        left.append("\n", style="grey19")
+        left.append(" EMPIRE ", style="black on grey19")
+        left.append("\uE0B4", style="grey19")
+    
+        left.append("", style="grey35")
+        left.append(f" ⚙ {user}@{hostname} ", style="black on grey35")
+        left.append("\uE0B4", style="grey35")
+    
+        left.append("", style="grey54")
+        left.append(f" 📁 {folder} ", style="black on grey54")
+        left.append("\uE0B4", style="grey54")
+    
+        left.append("", style="orange3")
+        left.append(f" ⚡ {mem_percent}% ", style="black on orange3")
+        left.append("\uE0B4", style="orange3")
+    
+        if branch:
+            left.append("", style="gold3")
+            left.append(f"  {branch} ", style="black on gold3")
+            left.append("\uE0B4", style="gold3")
+            if changes > 0:
+                left.append("", style="red3")
+                left.append(f"  {changes} changes ", style="black on red3")
+                left.append("\uE0B4", style="red3")
+    
+        # RIGHT prompt
+        right = Text()
+        right.append(f"{exec_time}  -  {current_time}", style="bold palegreen3")
+    
+        # Combine both with spacing
+        spacing = " " * max(console.width - len(left.plain.splitlines()[-1]) - len(right.plain), 1)
+    
+        # Imperial Quote Line
+        quote_line = Text()
+        quote_line.append("\n")
+        quote_line.append("The Empire commands", style="red italic")
+        quote_line.append(" > ", style="bold white")
+    
+        # Final prompt
+        global prompt
+        prompt = left + Text(spacing) + right + quote_line
+        self.set_prompt(prompt)
+        return prompt
 
+    
     def change_terminal(self, *args):
         global prompt_flag
         prompt_flag = False
@@ -419,7 +501,8 @@ class Terminal:
             "5 - Clean Detailed",
             "6 - Atomic-Lite",
             "7 - PyShell Default",
-            "8 - Softline"
+            "8 - Softline",
+            "9 - Galactic Empire"
         ]
 
         choice = questionary.select(
