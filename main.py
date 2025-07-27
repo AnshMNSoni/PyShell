@@ -25,6 +25,7 @@ from terminals import Terminal
 from weather import Weather
 from dotenv import load_dotenv
 from bulk_file_rename import BulkRenamer
+from ping import ping 
 
 load_dotenv()
 
@@ -215,6 +216,7 @@ def main():
             number=Prompt.ask("Want numbered files?", choices=["y","n"], default="n") == "y",
             new_extension=Prompt.ask("New extension (for eg .txt , .docx)", default="")
         ),
+        "ping": lambda args: ping(args[0]),
         
         # Git Commands (Using Git Class)
         "git-status": git.git_status,
