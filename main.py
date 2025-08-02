@@ -26,6 +26,7 @@ from weather import Weather
 from dotenv import load_dotenv
 from bulk_file_rename import BulkRenamer
 from ping import ping 
+from quasim import Simulator
 
 load_dotenv()
 
@@ -217,6 +218,7 @@ def main():
             new_extension=Prompt.ask("New extension (for eg .txt , .docx)", default="")
         ),
         "ping": lambda args: ping(args[0]),
+        "quasim": lambda args: Simulator().open_simulator(args),
         
         # Git Commands (Using Git Class)
         "git-status": git.git_status,
