@@ -27,6 +27,7 @@ from dotenv import load_dotenv
 from bulk_file_rename import BulkRenamer
 from ping import ping 
 from quasim import Simulator
+from shortprompt import ShortPrompt
 
 load_dotenv()
 
@@ -37,7 +38,7 @@ scheduled_jobs = {}
 commands = {}
 stop_scheduler = False
 prompt_flag = True
-
+prompt = ShortPrompt()
 
 # Load users
 def load_users():
@@ -219,6 +220,7 @@ def main():
         ),
         "ping": lambda args: ping(args[0]),
         "quasim": lambda args: Simulator().open_simulator(args),
+        "prompt": lambda args: prompt.run(),
         
         # Git Commands (Using Git Class)
         "git-status": git.git_status,
