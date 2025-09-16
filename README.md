@@ -114,9 +114,11 @@ Thank you for considering contributing! Please follow these steps:
 4. **Push to your fork** (`git push origin feature-branch`).
 5. **Submit a Pull Request** and wait for review.
 
-### 🔗 Connect with Me:
-`GitHub` - [Visit](https://github.com/AnshMNSoni) </br>
-`LinkedIn` - [Visit](https://linkedin.com/in/anshsoni) </br>
-`Follow Us` - [Visit](https://linkedin.com/company/py-shell)
+# 📢 Connect with Me
+If you found this project helpful or have any suggestions, feel free to connect:
 
-## Thankyou 😀<br/>
+- [![LinkedIn](https://img.shields.io/badge/LinkedIn-anshmnsoni-0077B5.svg?logo=linkedin)](https://www.linkedin.com/in/anshmnsoni)  
+- [![GitHub](https://img.shields.io/badge/GitHub-AnshMNSoni-181717.svg?logo=github)](https://github.com/AnshMNSoni)
+- [![Reddit](https://img.shields.io/badge/Reddit-u/AnshMNSoni-FF4500.svg?logo=reddit)](https://www.reddit.com/user/AnshMNSoni)
+
+### Thankyou 💫
