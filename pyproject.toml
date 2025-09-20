@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyshellcli"
-version = "1.4.3"                   
+version = "0.3.2"                   
 description = "PyShell is a lightweight Python-based CLI that enhances the terminal experience with system commands, automation, advance math tools, Artifical Intelligence and network utilities."
 authors = [{name = "Ansh Soni", email = "developers.pyshell@gmail.com"}]  
 readme = "README.md"               

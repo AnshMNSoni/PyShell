@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: pyshellcli
-Version: 1.4.3
+Version: 0.3.2
 Summary: PyShell is a lightweight Python-based CLI that enhances the terminal experience with system commands, automation, advance math tools, Artifical Intelligence and network utilities.
 Author-email: Ansh Soni <developers.pyshell@gmail.com>
 Requires-Python: >=3.7
@@ -15,10 +15,6 @@ Dynamic: license-file
 PyShell is a custom-built command-line interface (CLI) that serves as a lightweight yet powerful terminal, developed using Python. It allows users to interact with their system, manage files, process system commands, and perform various utility functions. With a focus on simplicity, speed, and usability, PyShell enhances the standard terminal experience by integrating automation, process management, and network utilities.
 
 ## 🔑 Key Advantages:
-
-#### 0️⃣ User Login for Security
-###### Preview </br></br>
-![image](https://github.com/user-attachments/assets/d9dacb15-f89c-4fd1-a28c-ef0b8915c4f5)
 
 #### 1️⃣ Task Scheduling
 ###### Preview </br></br>
@@ -83,36 +79,83 @@ PyShell is a custom-built command-line interface (CLI) that serves as a lightwei
 
 ![Screenshot 2025-05-18 131424](https://github.com/user-attachments/assets/a34d24c1-1a6b-4be2-88b8-1d1abd43f801)
 
+#### 1️⃣1️⃣ Stock Monitoring
+###### Preview </br> </br>
+<img width="1447" height="543" alt="image" src="https://github.com/user-attachments/assets/c4a7ebc3-1d6e-433a-b0f5-296167138684" />
+
+#### 1️⃣2️⃣ Short Prompt Feature
+###### Preview </br> </br>
+<img width="1415" height="389" alt="image" src="https://github.com/user-attachments/assets/68fc20b2-4f3a-405d-9745-17a6f209206c" />
+
+<img width="1426" height="331" alt="image" src="https://github.com/user-attachments/assets/d010b20e-4298-40db-9f45-82b9183c85ca" />
+
+
 #### and many more...
 
-## 🧑‍💻 How to use:
+## 🧑‍💻 How to setup:
 1️⃣ Clone the Repository:</br>
 ```sh
-git clone https://github.com/AnshMNSoni/PyShell.git
+pip install pyshellcli
 ```
 
 2️⃣ Install all require dependencies:</br>
 ```sh
 pip install -r requirements.txt
 ```
+###### Now, you are good to go...
 
-3️⃣ SignUp to Open Weather For weather API: [Visit](https://openweathermap.org/)
-
-4️⃣ Replace you API_KEY:
-- Inside `get_weather` function
-- api_key = "YOUR_API_KEY" </br>
-
-###### Preview</br></br>
-![image](https://github.com/user-attachments/assets/b6928f38-0319-48ba-aaaf-39d1f7b873e7)
-</br>
-
-5️⃣ Lastly, Open you terminal and run:</br>
+## How to use:
+1️⃣ To experience "pyshell" run:</br>
 ```sh
-python main.py
+from pyshell.main import main
+
+main()
 ```
 
-## 🔎 Future Work:
-1️⃣ Upscale it to the Operating system (i.e. MyOS)
+2️⃣ Run individual module:</br>
+1. Equation Solver:
+```sh
+from pyshellcli.equations import Equations
+
+Equations().solve_equation(["x + y = 3; x - y = 3"])
+```
+
+2. Playing Song:
+```sh
+from pyshellcli.song import Song
+
+Song().play_song("Janam Janam")
+```
+
+3. Plotting Graphs:
+```sh
+from pyshellcli.graphs import GraphPlotter
+
+GraphPlotter().plot_implicit()
+```
+
+4. Check Weather:
+```sh
+from pyshellcli.weather import Weather
+
+Weather().get_weather(["Navsari"])
+```
+
+5. Check Stock:
+```sh
+from pyshellcli.stocks import Stock
+
+Stock().get_stock_info(["IBM"])
+```
+
+6. Play Games:
+```sh
+from pyshellcli.game import Game
+
+Game().play_game()
+```
+
+and many more...
 
 ## 🤝 Contributing to PyShell
 
