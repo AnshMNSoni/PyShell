@@ -40,19 +40,6 @@ prompt_flag = True
 prompt = ShortPrompt()
 
 # Load users
-def load_users():
-    with lock:
-        if os.path.exists(USER_FILE):
-            with open(USER_FILE, "r") as file:
-                return json.load(file)
-    return {}
-
-
-def save_users(users):
-    with lock:
-        with open(USER_FILE, "w") as file:
-            json.dump(users, file, indent=4)
-
 
 def clipboard_copy(text):
     with lock:
@@ -63,35 +50,6 @@ def clipboard_copy(text):
 def clipboard_paste():
     with lock:
         console.print(f"Clipboard Content: {pyperclip.paste()}", style="bold yellow")
-
-
-# User Authentication
-def register_user():
-    users = load_users()
-    username = Prompt.ask("Enter new username")
-    role = Prompt.ask(
-        "Assign role (admin/user)", choices=["admin", "user"], default="user"
-    )
-    if username in users:
-        console.print("User already exists!", style="bold red")
-        return register_user()
-    password = Prompt.ask("Enter password", password=True)
-    users[username] = {"password": password, "role": role}
-    save_users(users)
-    console.print("User registered successfully!", style="bold green")
-    return username, role
-
-
-def login_user():
-    users = load_users()
-    username = Prompt.ask("Enter username")
-    password = Prompt.ask("Enter password", password=True)
-    if username in users and users[username]["password"] == password:
-        console.print("Login successful!", style="bold green")
-        return username, users[username]["role"]
-    else:
-        console.print("Invalid credentials!", style="bold red")
-        return login_user()
 
 
 # Synchronization
@@ -118,7 +76,7 @@ def generate_password(*args):
     except ValueError:
         console.print("Invalid input. Using default length (12)", style="bold red")
         length = 12
-        display_prompt(username)
+        display_prompt()
         return
 
     characters = string.ascii_letters + string.digits + string.punctuation
@@ -131,7 +89,7 @@ def generate_password(*args):
 terminal = Terminal()
 
 
-def display_prompt(username):
+def display_prompt():
     if config.current_terminal_layout == 1:
         Terminal().terminal_1()
     elif config.current_terminal_layout == 2:
@@ -164,12 +122,6 @@ def main():
     ascii_banner = pyfiglet.figlet_format("PyShell")
     print(ascii_banner)
 
-    global username
-    username, role = (
-        register_user()
-        if Prompt.ask("New user?", choices=["y", "n"]) == "y"
-        else login_user()
-    )
     # Objects
     cmds = Commands()
     task = Task()
@@ -251,7 +203,7 @@ def main():
     scheduler_thread.start()
 
     while True:
-        display_prompt(username)
+        display_prompt()
         command = input().strip().lower().split()
 
         if not command:

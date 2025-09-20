@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: pyshellcli
-Version: 1.4.2
+Version: 1.4.3
 Summary: PyShell is a lightweight Python-based CLI that enhances the terminal experience with system commands, automation, advance math tools, Artifical Intelligence and network utilities.
 Author-email: Ansh Soni <developers.pyshell@gmail.com>
 Requires-Python: >=3.7
