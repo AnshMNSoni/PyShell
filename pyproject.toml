@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyshell"
+version = "1.4.2"                   
+description = "PyShell is a lightweight Python-based CLI that enhances the terminal experience with system commands, automation, advance math tools, Artifical Intelligence and network utilities."
+authors = [{name = "Ansh Soni", email = "developers.pyshell@gmail.com"}]  
+readme = "README.md"               
+requires-python = ">=3.7"          
+
+[project.scripts]
+pyshell = "pyshell.main:main"  
