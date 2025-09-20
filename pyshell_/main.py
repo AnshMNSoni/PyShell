@@ -11,27 +11,27 @@ import pyperclip
 from rich.console import Console
 from rich.prompt import Prompt
 
-import config
-from equations import Equations
-from game import Game
-from git_commands import Git
-from graphs import GraphPlotter
-from linux_commands import Commands
-from song import Song
-from statistical import StatisticsCalculator
-from stocks import Stock
-from task import Task
-from terminals import Terminal
-from weather import Weather
+import pyshell_.config as config
+from pyshell_.equations import Equations
+from pyshell_.game import Game
+from pyshell_.git_commands import Git
+from pyshell_.graphs import GraphPlotter
+from pyshell_.linux_commands import Commands
+from pyshell_.song import Song
+from pyshell_.statistical import StatisticsCalculator
+from pyshell_.stocks import Stock
+from pyshell_.task import Task
+from pyshell_.terminals import Terminal
+from pyshell_.weather import Weather
 from dotenv import load_dotenv
-from bulk_file_rename import BulkRenamer
-from ping import ping 
-from shortprompt import ShortPrompt
+from pyshell_.bulk_file_rename import BulkRenamer
+from pyshell_.ping import ping 
+from pyshell_.shortprompt import ShortPrompt
 
 load_dotenv()
 
 console = Console()
-USER_FILE = "users.json"
+USER_FILE = os.path.join("pyshell", "users.json")
 lock = threading.Lock()
 scheduled_jobs = {}
 commands = {}

@@ -8,7 +8,7 @@ from datetime import datetime
 from rich.text import Text
 from rich.console import Console
 from rich.prompt import Prompt
-import config
+import pyshell_.config as config
 import questionary
 
 console = Console()
