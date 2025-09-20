@@ -6,10 +6,6 @@ PyShell is a custom-built command-line interface (CLI) that serves as a lightwei
 
 ## 🔑 Key Advantages:
 
-#### 0️⃣ User Login for Security
-###### Preview </br></br>
-![image](https://github.com/user-attachments/assets/d9dacb15-f89c-4fd1-a28c-ef0b8915c4f5)
-
 #### 1️⃣ Task Scheduling
 ###### Preview </br></br>
 ![image](https://github.com/user-attachments/assets/d0cf8b40-52ca-47a4-a60c-26278e65bc69)
